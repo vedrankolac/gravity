@@ -1,4 +1,4 @@
-## fxhash-pendulum
+## gravity
 Boilerplate for a fast start with three.js materials in rapier physics engine on Oculus Quest 2 VR headset.
 - only tested on Oculus Quest 2
 - movement is controlled with joystick
@@ -10,7 +10,7 @@ npm start
 ````
 
 #### GitHub Page
-https://birdlaketree.github.io/rapier-boilerplate/
+https://vedrankolac.github.io/gravity/
 
 ### How to deploy for github pages
 ```bash

@@ -1,5 +1,5 @@
 {
-  "name": "fxhash-pendulum",
+  "name": "gravity",
   "source": "src/index.html",
   "targets": {
     "default": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/birdlaketree/fxhash-pendulum.git"
+    "url": "git+https://github.com/vedrankolac/gravity.git"
   },
   "keywords": [
     "javascript",
@@ -28,9 +28,9 @@
   "author": "vedran.kolac@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/birdlaketree/fxhash-pendulum/issues"
+    "url": "https://github.com/vedrankolac/gravity/issues"
   },
-  "homepage": "https://birdlaketree.github.io/fxhash-pendulum/",
+  "homepage": "https://vedrankolac.github.io/gravity/",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.3.2",
     "buffer": "^6.0.3",
