@@ -1,5 +1,6 @@
 import { GUI } from 'dat.gui';
 import { 
+  PointLight,
   AmbientLight,
   SpotLight,
 } from 'three';
@@ -12,9 +13,16 @@ const createLights = scene => {
   // setting lower mapSize makes it much faster on iPhone 12 Pro Max
   // const spot = new SpotLight(0xffffff, 840);
 
+  // const point = new PointLight(0xffffff, 4);
+  // point.position.set(0, 20, 0);
+  // point.castShadow = true;
+  // point.shadow.mapSize.width = 4096;
+  // point.shadow.mapSize.height = 4096;
+  // scene.add(point);
+
   const spot = new SpotLight(0xffffff, 920);
   spot.penumbra = 1;
-  spot.decay = 2;
+  spot.decay = 2.4;
   spot.angle = Math.PI/4;
   spot.position.set(0, 20, 0);
   spot.target.position.set(0, 0, 0);

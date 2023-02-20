@@ -239,7 +239,9 @@ const colorComposer = () => {
     colorConfig = tripple();
     paleteName = tripple.name;
   }
-  // let colorConfig = grayscale();
+
+  // colorConfig = tripple();
+  // paleteName = tripple.name;
 
   console.log('palette:  ', paleteName, colorCompositionID);
   return colorConfig;

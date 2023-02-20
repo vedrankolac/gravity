@@ -15,6 +15,8 @@ const cube = (
     depthSegments = 1
   ) => {
 
+  let initMovement = false;
+
   const geometry = new BoxGeometry(
     size.width,
     size.height,
@@ -38,6 +40,25 @@ const cube = (
   const collider = ColliderDesc.cuboid(size.width / 2, size.height / 2, size.depth / 2);
 
   physicsWorld.createCollider(collider, rigidBody);
+
+  rigidBody.tick = (delta) => {
+    if (!initMovement) {
+      console.log('tick cuboid');
+      initMovement = true;
+      const ir = 0.004;
+      const tir = 0.00004;
+      rigidBody.applyImpulse({
+        x: Math.random() * ir - ir/2,
+        y: Math.random() * ir - ir/2,
+        z: Math.random() * ir - ir/2
+      }, true);
+      rigidBody.applyTorqueImpulse({
+        x: Math.random() * tir - tir/2,
+        y: Math.random() * tir - tir/2,
+        z: Math.random() * tir - tir/2
+      }, true);
+    }
+  };
 
   return {
     mesh: mesh,
