@@ -26,11 +26,12 @@ const walls = (scene, size, bgHSL, color) => {
     metalness: plastic.metalness,
   });
 
-  const geometryPlane = new PlaneGeometry(size, size, 4, 4);
-  const floor = new Mesh(geometryPlane, materialFloor);
-  floor.receiveShadow = true;
-  floor.rotation.x = MathUtils.degToRad(270);
-  scene.add(floor);
+  // const geometryPlane = new PlaneGeometry(size, size, 4, 4);
+  // const floor = new Mesh(geometryPlane, materialFloor);
+  // floor.receiveShadow = true;
+  // floor.rotation.x = MathUtils.degToRad(270);
+  // floor.position.y = -6;
+  // scene.add(floor);
 
   const geometryDome = new SphereGeometry(size/2, 64, 64);
   const dome = new Mesh(geometryDome, materialDome);

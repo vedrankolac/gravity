@@ -4,7 +4,7 @@ import {
   ColliderDesc
 } from '@dimforge/rapier3d-compat';
 
-const cube = (
+const plane = (
     material,
     size,
     translation,
@@ -43,22 +43,22 @@ const cube = (
   physicsWorld.createCollider(collider, rigidBody);
 
   rigidBody.tick = (delta) => {
-    // if (!initMovement) {
-    //   // console.log('tick cuboid');
-    //   initMovement = true;
-    //   const ir = 0.004;
-    //   const tir = 0.00004;
-    //   rigidBody.applyImpulse({
-    //     x: fxrand() * ir - ir/2,
-    //     y: fxrand() * ir - ir/2,
-    //     z: fxrand() * ir - ir/2
-    //   }, true);
-    //   rigidBody.applyTorqueImpulse({
-    //     x: fxrand() * tir - tir/2,
-    //     y: fxrand() * tir - tir/2,
-    //     z: fxrand() * tir - tir/2
-    //   }, true);
-    // }
+    if (!initMovement) {
+      // console.log('tick cuboid');
+      initMovement = true;
+      const ir = 0.2;
+      const tir = 0.6;
+      rigidBody.applyImpulse({
+        x: fxrand() * ir - ir/2,
+        y: fxrand() * ir - ir/2,
+        z: fxrand() * ir - ir/2
+      }, true);
+      rigidBody.applyTorqueImpulse({
+        x: fxrand() * tir - tir/2,
+        y: fxrand() * tir - tir/2,
+        z: fxrand() * tir - tir/2
+      }, true);
+    }
   };
 
   return {
@@ -68,4 +68,4 @@ const cube = (
   };
 }
 
-export { cube };
+export { plane };

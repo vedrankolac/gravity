@@ -11,6 +11,8 @@ const sphere = (
     rotation,
     physicsWorld
   ) => {
+  
+  let initMovement = false;
 
   const geometry = new SphereGeometry(size.radius, 64, 64);
   const mesh = new Mesh( geometry, material );
@@ -25,22 +27,30 @@ const sphere = (
   rigidBodyDesc.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w });
 
   const rigidBody = physicsWorld.createRigidBody(rigidBodyDesc);
+  rigidBody.stopped = false;
   const collider = ColliderDesc.ball(size.radius)
     .setRestitution(0.9);
 
   physicsWorld.createCollider(collider, rigidBody);
 
-  // rigidBody.tick = (delta) => {
-  //   const treshold = Math.random();
-  //   const impulseRange = 0.01;
-  //   if (treshold < 0.02 && ((mesh.position.y - size.radius) < 0.01)) {
-  //     rigidBody.applyImpulse({
-  //       x: Math.random() * impulseRange - impulseRange/2,
-  //       y: Math.random() * impulseRange/2,
-  //       z: Math.random() * impulseRange - impulseRange/2
-  //     }, true);
-  //   }
-  // };
+  rigidBody.tick = (delta) => {
+    // if (!initMovement) {
+    //   // console.log('tick sphere');
+    //   initMovement = true;
+    //   const ir = 0.0004;
+    //   const tir = 0.00001;
+    //   rigidBody.applyImpulse({
+    //     x: fxrand() * ir - ir/2,
+    //     y: fxrand() * ir - ir/2,
+    //     z: fxrand() * ir - ir/2
+    //   }, true);
+    //   rigidBody.applyTorqueImpulse({
+    //     x: fxrand() * tir - tir/2,
+    //     y: fxrand() * tir - tir/2,
+    //     z: fxrand() * tir - tir/2
+    //   }, true);
+    // }
+  };
 
   return {
     mesh: mesh,

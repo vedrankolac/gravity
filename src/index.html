@@ -10,9 +10,10 @@
       let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
       
       var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
-      // var fxhash = "ookgB9RPSdVJWfsbBa6Cxmk4o7D5bGQM1tG9mC6CwE7qWjF9tjL";
-      // var fxhash = "oofKNbtgPi3avSf3BpF9t5N4SEQuEzmFapL4zExuxCUoAujYKB8";
-      // var fxhash = "oo6EpBzjC6dnBaFhzbW2ZMizDor9WPNURjL2grqA9R213wgb427";
+      // var fxhash = "oozAeZMfNAzwgYyyTgaoEqVfjUfPs9SFjSBP2yYC8a2YX7eohAz";
+      // var fxhash = "ooHQJGWFnPfbabq2niD9gW8k6JyDyHaz45PbiJEBpvbYjsN3n3F";
+      // var fxhash = "oo6nSeJf5uooAfeSsVSTxTDoniZQ7Sfa8kBeQuouK5Em9MG2YYo";
+      // var fxhash = "ooroxbhqLS66o6RPciASd1pcD1hgEyY3e6A9XKyU4ymzqJTJ9Dx";
       
       let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
       let fxhashTrunc = fxhash.slice(2)

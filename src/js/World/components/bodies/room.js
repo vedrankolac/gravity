@@ -7,33 +7,33 @@ import {
 const room = (physicsWorld, floorSize, isVisible = false) => {
   const wallTickness = 1;
 
-  const floor = {
-    size: {
-      width:  floorSize/2,
-      height: wallTickness,
-      depth:  floorSize/2,
-    },
-    translation: {
-      x: 0,
-      y: -1,
-      z: 0
-    },
-    rotation: {
-      x: 0,
-      y: 0,
-      z: 0
-    }
-  }
+  // const floor = {
+  //   size: {
+  //     width:  floorSize/2,
+  //     height: wallTickness,
+  //     depth:  floorSize/2,
+  //   },
+  //   translation: {
+  //     x: 0,
+  //     y: -6 -1,
+  //     z: 0
+  //   },
+  //   rotation: {
+  //     x: 0,
+  //     y: 0,
+  //     z: 0
+  //   }
+  // }
 
-  const floorRigidBodyDesc = RigidBodyDesc.fixed();
-  floorRigidBodyDesc.setTranslation(floor.translation.x, floor.translation.y, floor.translation.z);
-  // const floorq = new Quaternion().setFromEuler(
-  //   new Euler( floor.rotation.x, floor.rotation.y, floor.rotation.z, 'XYZ' )
-  // )
-  // floorRigidBodyDesc.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w });
-  const floorRigidBody = physicsWorld.createRigidBody(floorRigidBodyDesc);
-  let floorCollider = ColliderDesc.cuboid(floor.size.width, floor.size.height, floor.size.depth);
-  physicsWorld.createCollider(floorCollider, floorRigidBody);
+  // const floorRigidBodyDesc = RigidBodyDesc.fixed();
+  // floorRigidBodyDesc.setTranslation(floor.translation.x, floor.translation.y, floor.translation.z);
+  // // const floorq = new Quaternion().setFromEuler(
+  // //   new Euler( floor.rotation.x, floor.rotation.y, floor.rotation.z, 'XYZ' )
+  // // )
+  // // floorRigidBodyDesc.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w });
+  // const floorRigidBody = physicsWorld.createRigidBody(floorRigidBodyDesc);
+  // let floorCollider = ColliderDesc.cuboid(floor.size.width, floor.size.height, floor.size.depth);
+  // physicsWorld.createCollider(floorCollider, floorRigidBody);
 
   // const ceeling = {
   //   size: {
@@ -43,7 +43,7 @@ const room = (physicsWorld, floorSize, isVisible = false) => {
   //   },
   //   translation: {
   //     x: 0,
-  //     y: floorSize + 1,
+  //     y: 6 + 1,
   //     z: 0
   //   },
   //   rotation: {

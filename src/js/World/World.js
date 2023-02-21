@@ -12,9 +12,6 @@ import { VrControls } from './system/VrControls.js'
 import { createHandsPhysicsController } from "./system/handsPhysicsController.js"
 import { room as roomPhysicsComposition } from './components/bodies/room.js'
 import { walls } from './components/meshes/walls.js'
-import { pendulum } from "./components/bodies/pendulum/pendulum.js"
-import { spheres } from "./components/sceneFragments/spheres.js"
-import { cubes } from "./components/sceneFragments/cubes.js"
 import { colorComposer } from './components/bodies/pendulum/colorComposer.js'
 import { RoomEnvironment } from './components/stage/RoomEnv'
 import { setPrintTools } from './utils/setPrintTools'
@@ -22,16 +19,16 @@ import { ssao as postprocessing } from './components/effects/ssao'
 import { materialTester } from './utils/materialTester'
 import { lightTester } from './utils/lightTester'
 import { Resizer } from './system/Resizer'
-import { planetsConfig } from "./components/bodies/planetsConfig";
 
-import { cuboids } from './components/debris/cuboids'
+import { cuboids } from './components/debris/cuboids';
+import { spheres } from './components/debris/spheres';
+import { planes } from './components/debris/planes';
+
 
 class World {
   constructor() {
     console.log('fxhash:   ', fxhash);
 
-    this.planetsConfig = planetsConfig();
-    this.gravity = this.planetsConfig.gravity;
     this.gravity = 0;
     this.dt = 1/120;
 
@@ -88,14 +85,11 @@ class World {
     // this.materialTester      = materialTester(this.scene, envMap);
     // this.lightTester         = lightTester(this.scene, envMap);
 
-    this.cuboids             = cuboids(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition, {min: 0.006, sizeRange: 0.04, n: 48, y: 0.06, yRange: 2});
-    
-    this.walls               = walls    (this.scene, this.floorSize, this.bgHSL, this.bgColor);
-    // this.pendulum            = pendulum (this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition, this.gravity);
-    // this.spheresFragment     = spheres  (this.scene, this.loop, this.physicsWorld, envMap, this.bgHSL, {min: 0.02,  sizeRange: fxrand()/20, n: 8, y: 0.2, yRange: 3});
-    // this.cubesFragment       = cubes    (this.scene, this.loop, this.physicsWorld, envMap, this.bgHSL, {min: 0.05,  sizeRange: 0.10, n: 10 , y: 0.2,  yRange: 2});
-    // this.miniCubesFragment   = cubes    (this.scene, this.loop, this.physicsWorld, envMap, this.bgHSL, {min: 0.006, sizeRange: 0.04, n: 48, y: 0.06, yRange: 2});
-    
+    this.cuboids             = cuboids(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
+    this.planes              = planes (this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
+    this.spheres             = spheres(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
+    this.walls               = walls  (this.scene, this.floorSize, this.bgHSL, this.bgColor);
+
     // this.orbitControls.target = this.pendulum.handleB.mesh.position;
   }
 

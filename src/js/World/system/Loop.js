@@ -19,6 +19,7 @@ class Loop {
     this.gravity = gravity;
     this.dt = dt;
     this.accumulator = 0;
+    this.stopCounter = 0;
     document.addEventListener('keypress', this.togglePhysicsEngine);
   }
 
@@ -65,17 +66,17 @@ class Loop {
       object.tick(this.dt);
     }
     
-    // boundary crossing impulse that kicks body back to the direction of center
+    // stop all the bodies
     this.bodies.forEach(body => {
-      if (body.mesh.name === 'handle') {
-        const position = body.rigidBody.translation();
-        const b = new Vector2(position.x, position.z);
-
-        if (b.length() > 18) {
-          const xI = -position.x/b.length() * 0.1;
-          const zI = -position.z/b.length() * 0.1;
-          body.rigidBody.applyImpulse({x: xI, y: 0, z: zI}, true);
-        }
+      if (this.stopCounter < this.bodies.length*6) {
+        body.rigidBody.resetForces(true);  // Reset the forces to zero.
+        body.rigidBody.resetTorques(true); // Reset the torques to zero.
+        body.rigidBody.setLinvel({x: 0, y: 0, z: 0}, true);
+        body.rigidBody.setAngvel({x: 0, y: 0, z: 0}, true);
+        ++ this.stopCounter;
+        console.log('stop body', this.bodies.length);
+      } else {
+        body.rigidBody.tick();
       }
     });
   }

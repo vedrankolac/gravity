@@ -1,9 +1,9 @@
-import { cube } from "../bodies/cube";
+import { plane } from "../bodies/plane";
 import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
 import { hslToHex } from "../../utils/colorUtils";
-import { MathUtils } from 'three';
+import { MathUtils, DoubleSide } from 'three';
 
-const cuboids = (
+const planes = (
   scene,
   loop,
   physicsWorld,
@@ -15,16 +15,16 @@ const cuboids = (
     colorComposition.b.color,
     colorComposition.c.color
   ];
-  const spreadWidth = 10;
+  const spreadWidth = 8;
 
-  for (let i = 0; i < 240; i++) {
+  for (let i = 0; i < 3; i++) {
     const randomSeed = fxrand();
     const colorIndex = Math.round((colors.length - 1) * randomSeed)
     const material = defaultColorMattPlastic(colors[colorIndex], 1, envMap);
     const size = {
-      width:  fxrand() * 0.12 + 0.02,
-      height: fxrand() * 0.12 + 0.02,
-      depth:  fxrand() * 1.2   + 0.6
+      width:  fxrand() * 10 + 2,
+      height: fxrand() * 8 + 1,
+      depth:  0.02
     }
     const translation = {
       x: fxrand() * spreadWidth - spreadWidth/2,
@@ -36,10 +36,10 @@ const cuboids = (
       y: MathUtils.degToRad(fxrand() * 360),
       z: MathUtils.degToRad(fxrand() * 360),
     }
-    const cubeItem = cube(material, size, translation, rotation, physicsWorld);
-    scene.add(cubeItem.mesh);
-    loop.bodies.push(cubeItem);
+    const planeItem = plane(material, size, translation, rotation, physicsWorld);
+    scene.add(planeItem.mesh);
+    loop.bodies.push(planeItem);
   }
 }
 
-export { cuboids };
+export { planes };
