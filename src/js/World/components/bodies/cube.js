@@ -3,6 +3,7 @@ import {
   RigidBodyDesc,
   ColliderDesc
 } from '@dimforge/rapier3d-compat';
+import { shiftHandleUVs } from './pendulum/shiftHandleUVs';
 
 const cube = (
     material,
@@ -17,6 +18,17 @@ const cube = (
 
   let initMovement = false;
 
+  const conf = {
+    size: {
+      width: size.width,
+      height: size.height,
+      depth: size.depth
+    },
+    extremes: {
+      maxWidth: 1.8
+    }
+  }
+
   const geometry = new BoxGeometry(
     size.width,
     size.height,
@@ -28,6 +40,7 @@ const cube = (
   const mesh = new Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
+  shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
   const rigidBodyDesc = RigidBodyDesc.dynamic();
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);

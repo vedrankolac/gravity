@@ -2,6 +2,8 @@ import { cube } from "../bodies/cube";
 import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
 import { hslToHex } from "../../utils/colorUtils";
 import { MathUtils } from 'three';
+import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
+import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";
 
 const cuboids = (
   scene,
@@ -10,17 +12,36 @@ const cuboids = (
   envMap,
   colorComposition,
 ) => {
-  const colors = [
-    colorComposition.a.color,
-    colorComposition.b.color,
-    colorComposition.c.color
-  ];
+
+  const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.55);
+  const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.55);
+  const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.55);
+
+  const material_1 = canvasTextureMaterial(
+    {...maps_1, envMap},
+    {roughness: 0.25, metalness: 0},
+    1
+  );
+  const material_2 = canvasTextureMaterial(
+    {...maps_2, envMap},
+    {roughness: 0.25, metalness: 0},
+    1
+  );
+  const material_3 = canvasTextureMaterial(
+    {...maps_3, envMap},
+    {roughness: 0.25, metalness: 0},
+    1
+  );
+
+  const materials = [material_1, material_2, material_3];
+  
   const spreadWidth = 10;
 
   for (let i = 0; i < 240; i++) {
     const randomSeed = fxrand();
-    const colorIndex = Math.round((colors.length - 1) * randomSeed)
-    const material = defaultColorMattPlastic(colors[colorIndex], 1, envMap);
+    const materialIndex = Math.round((materials.length - 1) * randomSeed)
+    const material = materials[materialIndex];
+
     const size = {
       width:  fxrand() * 0.12 + 0.02,
       height: fxrand() * 0.12 + 0.02,
