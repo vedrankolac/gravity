@@ -1,23 +1,34 @@
 import {
-  SphereGeometry,
-  Mesh,
+  LineBasicMaterial,
+  Vector3,
+  BufferGeometry,
+  Line,
   Quaternion,
-  Euler
+  Euler,
 } from 'three';
 import {
   RigidBodyDesc,
   ColliderDesc
 } from '@dimforge/rapier3d-compat';
 
-const sphere = (
-    material,
-    size,
-    translation,
-    rotation,
-    physicsWorld
-  ) => {
-  const geometry = new SphereGeometry(size.radius, 64, 64);
-  const mesh = new Mesh( geometry, material );
+export const line = (
+  color,
+  size,
+  translation,
+  rotation,
+  physicsWorld
+) => {
+  const colliderWidthDepth = 0.01;
+
+  const material = new LineBasicMaterial({color: color});
+
+  const points = [
+    new Vector3(0,  size.length/2, 0),
+    new Vector3(0, -size.length/2, 0)
+  ];
+
+  const geometry = new BufferGeometry().setFromPoints(points);
+  const mesh = new Line(geometry, material);
   mesh.castShadow = true;
   mesh.receiveShadow = true;
 
@@ -29,14 +40,12 @@ const sphere = (
   rigidBodyDesc.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w });
 
   const rigidBody = physicsWorld.createRigidBody(rigidBodyDesc);
-  const collider = ColliderDesc.ball(size.radius)
-    .setRestitution(0.9);
+  const collider = ColliderDesc.cuboid(colliderWidthDepth, size.length / 2, colliderWidthDepth);
 
   physicsWorld.createCollider(collider, rigidBody);
 
   // rigidBody.tick = (delta) => {
-  //   console.log('tick sphere');
-  //   initMovement = true;
+  //   console.log('tick line');
   //   const ir = 0.0004;
   //   const tir = 0.00001;
   //   rigidBody.applyImpulse({
@@ -57,5 +66,3 @@ const sphere = (
     rigidBody: rigidBody
   };
 }
-
-export { sphere };

@@ -1,7 +1,6 @@
 import { plane } from "../bodies/plane";
 import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
-import { hslToHex } from "../../utils/colorUtils";
-import { MathUtils, DoubleSide } from 'three';
+import { MathUtils } from 'three';
 
 const planes = (
   scene,

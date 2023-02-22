@@ -1,12 +1,10 @@
-import { sphere } from "../bodies/sphere";
-import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
+import { line } from "../bodies/line";
 import { MathUtils } from "three";
 
-const spheres = (
+export const lines = (
   scene,
   loop,
   physicsWorld,
-  envMap,
   colorComposition
 ) => {
   const colors = [
@@ -18,11 +16,10 @@ const spheres = (
 
   for (let i = 0; i < 64; i++) {
     const randomSeed = fxrand();
-    const colorIndex = Math.round((colors.length - 1) * randomSeed)
-    const material = defaultColorMattPlastic(colors[colorIndex], 1, envMap);
+    const colorIndex = Math.round((colors.length - 1) * randomSeed);
 
     const size = {
-      radius: fxrand()/9 + 0.02
+      length: fxrand() * 2
     }
     const translation = {
       x: fxrand() * spreadWidth - spreadWidth/2,
@@ -34,10 +31,8 @@ const spheres = (
       y: MathUtils.degToRad(fxrand() * 360),
       z: MathUtils.degToRad(fxrand() * 360),
     }
-    const sphereItem = sphere(material, size, translation, rotation, physicsWorld);
-    scene.add(sphereItem.mesh);
-    loop.bodies.push(sphereItem);
+    const lineItem = line(colors[colorIndex], size, translation, rotation, physicsWorld);
+    scene.add(lineItem.mesh);
+    loop.bodies.push(lineItem);
   }
 }
-
-export { spheres };

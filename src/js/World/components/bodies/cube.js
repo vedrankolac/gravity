@@ -1,4 +1,9 @@
-import { BoxGeometry, Mesh, Quaternion, Euler } from 'three';
+import {
+  BoxGeometry,
+  Mesh,
+  Quaternion,
+  Euler
+} from 'three';
 import {
   RigidBodyDesc,
   ColliderDesc
@@ -15,9 +20,6 @@ const cube = (
     heightSegments = 1,
     depthSegments = 1
   ) => {
-
-  let initMovement = false;
-
   const conf = {
     size: {
       width: size.width,
@@ -50,29 +52,26 @@ const cube = (
   rigidBodyDesc.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w });
 
   const rigidBody = physicsWorld.createRigidBody(rigidBodyDesc);
-  rigidBody.stopped = false;
   const collider = ColliderDesc.cuboid(size.width / 2, size.height / 2, size.depth / 2);
 
   physicsWorld.createCollider(collider, rigidBody);
 
-  rigidBody.tick = (delta) => {
-    // if (!initMovement) {
-    //   // console.log('tick cuboid');
-    //   initMovement = true;
-    //   const ir = 0.004;
-    //   const tir = 0.00004;
-    //   rigidBody.applyImpulse({
-    //     x: fxrand() * ir - ir/2,
-    //     y: fxrand() * ir - ir/2,
-    //     z: fxrand() * ir - ir/2
-    //   }, true);
-    //   rigidBody.applyTorqueImpulse({
-    //     x: fxrand() * tir - tir/2,
-    //     y: fxrand() * tir - tir/2,
-    //     z: fxrand() * tir - tir/2
-    //   }, true);
-    // }
-  };
+  // rigidBody.tick = (delta) => {
+  //   console.log('tick cuboid');
+  //   initMovement = true;
+  //   const ir = 0.002;
+  //   const tir = 0.00002;
+  //   rigidBody.applyImpulse({
+  //     x: fxrand() * ir - ir/2,
+  //     y: fxrand() * ir - ir/2,
+  //     z: fxrand() * ir - ir/2
+  //   }, true);
+  //   rigidBody.applyTorqueImpulse({
+  //     x: fxrand() * tir - tir/2,
+  //     y: fxrand() * tir - tir/2,
+  //     z: fxrand() * tir - tir/2
+  //   }, true);
+  // };
 
   return {
     mesh: mesh,

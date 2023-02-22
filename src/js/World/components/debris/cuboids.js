@@ -1,6 +1,4 @@
 import { cube } from "../bodies/cube";
-import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
-import { hslToHex } from "../../utils/colorUtils";
 import { MathUtils } from 'three';
 import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
 import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";

@@ -23,6 +23,7 @@ import { Resizer } from './system/Resizer'
 import { cuboids } from './components/debris/cuboids';
 import { spheres } from './components/debris/spheres';
 import { planes } from './components/debris/planes';
+import { lines } from './components/debris/lines';
 
 
 class World {
@@ -88,6 +89,7 @@ class World {
     this.cuboids             = cuboids(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
     this.planes              = planes (this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
     this.spheres             = spheres(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
+    this.lines               = lines  (this.scene, this.loop, this.physicsWorld, this.colorComposition);
     this.walls               = walls  (this.scene, this.floorSize, this.bgHSL, this.bgColor);
 
     // this.orbitControls.target = this.pendulum.handleB.mesh.position;

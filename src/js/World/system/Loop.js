@@ -19,7 +19,8 @@ class Loop {
     this.gravity = gravity;
     this.dt = dt;
     this.accumulator = 0;
-    this.stopCounter = 0;
+    this.stopBodyCounter = 0;
+    this.allBodiesStopped = false;
     document.addEventListener('keypress', this.togglePhysicsEngine);
   }
 
@@ -61,24 +62,32 @@ class Loop {
   }
 
   updatePhysicsObjects = () => {
-    // update motor positions
-    for (const object of this.updatableBodies) {
-      object.tick(this.dt);
-    }
+    // update updatables if there are some
+    // for (const object of this.updatableBodies) {
+    //   object.tick(this.dt);
+    // }
     
-    // stop all the bodies
-    this.bodies.forEach(body => {
-      if (this.stopCounter < this.bodies.length*6) {
+    // stop all the bodies and them run tick on them only once
+    // bodies are stopped by setting zero force on all of them until they are placed so they are not overlapping in space
+    // looks like doing this in 6 steps is enough to acchive this result
+    if (this.stopBodyCounter < this.bodies.length*6) {
+      this.bodies.forEach(body => {
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
         body.rigidBody.setLinvel({x: 0, y: 0, z: 0}, true);
         body.rigidBody.setAngvel({x: 0, y: 0, z: 0}, true);
-        ++ this.stopCounter;
-        console.log('stop body', this.bodies.length);
-      } else {
-        body.rigidBody.tick();
-      }
-    });
+        ++ this.stopBodyCounter;
+        // console.log('stop body', this.bodies.length);
+      });
+    } else if (!this.allBodiesStopped){
+      this.bodies.forEach(body => {
+        if (body.rigidBody.tick != undefined) {
+          body.rigidBody.tick();
+        }
+      });
+      this.allBodiesStopped = true;
+    };
+
   }
 
   tick() {
