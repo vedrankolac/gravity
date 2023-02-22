@@ -57,7 +57,7 @@ class World {
     this.xrEnabled ? this.loop.updatableBodies.push(this.vrControls) : null;
 
     this.floorSize = 300;
-    setPrintTools(this.renderer, this.scene, this.camera);
+    this.printTools = setPrintTools(this.renderer, this.scene, this.camera);
 
     this.resizer = new Resizer(this.camera, this.renderer);
     this.resizer.onResize = () => {

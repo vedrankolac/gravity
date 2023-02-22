@@ -1,7 +1,7 @@
 import { hslToHex } from "../../../utils/colorUtils";
 
 const colorComposer = () => {
-  colorCompositionID = fxrand();
+  const colorCompositionID = fxrand();
   const envMapIntensity = 1;
 
   // primitives
