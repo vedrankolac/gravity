@@ -24,6 +24,7 @@ import { cuboids } from './components/debris/cuboids';
 import { spheres } from './components/debris/spheres';
 import { planes } from './components/debris/planes';
 import { lines } from './components/debris/lines';
+import { bullets } from './components/debris/bullets';
 
 
 class World {
@@ -86,11 +87,135 @@ class World {
     // this.materialTester      = materialTester(this.scene, envMap);
     // this.lightTester         = lightTester(this.scene, envMap);
 
-    this.cuboids             = cuboids(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
-    this.planes              = planes (this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
-    this.spheres             = spheres(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
-    this.lines               = lines  (this.scene, this.loop, this.physicsWorld, this.colorComposition);
-    this.walls               = walls  (this.scene, this.floorSize, this.bgHSL, this.bgColor);
+    this.spheres = spheres(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 10,
+        n: 16,
+        sizeRange: 0.1,
+        sizeMin: 0.1
+      }
+    );
+
+    this.smallSpheres = spheres(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 16,
+        n: 64,
+        sizeRange: 0.03,
+        sizeMin: 0.01
+      }
+    );
+
+    this.cuboidsLong = cuboids(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 10,
+        n: 224,
+        widthRange:  0.12,  widthMin: 0.02,
+        heightRange: 0.12, heightMin: 0.02,
+        depthRange:  1.4 ,  depthMin: 0.6,
+      }
+    );
+
+    this.cuboidsMid = cuboids(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 10,
+        n: 12,
+        widthRange:  0.4,   widthMin: 0.2,
+        heightRange: 0.4,  heightMin: 0.2,
+        depthRange:  0.4 ,  depthMin: 0.2,
+      }
+    );
+
+    this.cuboidsLarge = cuboids(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 12,
+        n: 3,
+        widthRange:  0.8,   widthMin: 1.0,
+        heightRange: 0.8,  heightMin: 1.0,
+        depthRange:  0.8 ,  depthMin: 1.0,
+      }
+    );
+
+    this.planes = planes(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 10,
+        n: 3,
+        widthRange:  10,   widthMin: 2,
+        heightRange:  8,  heightMin: 1,
+      }
+    );
+
+    this.planes = planes(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      this.colorComposition,
+      {
+        spreadWidth: 10,
+        n: 4,
+        widthRange:  2.4,   widthMin: 0.6,
+        heightRange: 3,  heightMin: 1,
+      }
+    );
+    
+    this.linesLong = lines(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      this.colorComposition,
+      {
+        spreadWidth: 14,
+        n: 48,
+        lengthRange: 3,
+        lengthMin: 0.1
+      }
+    );
+
+    this.tinyLines = lines(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      this.colorComposition,
+      {
+        spreadWidth: 14,
+        n: 32,
+        lengthRange: 0.4,
+        lengthMin: 0.01
+      }
+    );
+
+    this.bullets             = bullets(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
+    this.walls               = walls(this.scene, this.floorSize, this.bgHSL, this.bgColor);
 
     // this.orbitControls.target = this.pendulum.handleB.mesh.position;
   }

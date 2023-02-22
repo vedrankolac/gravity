@@ -9,7 +9,7 @@ const createCamera = () => {
   // camera.position.z = 9;
 
   // const radius  = fxrand()*15+9;
-  const radius  = 40;
+  const radius  = 25;
 
   // const polar   = MathUtils.degToRad(fxrand()*45+30);
   const polar   = MathUtils.degToRad(60);

@@ -20,12 +20,12 @@ export const setPrintTools = (renderer, scene, camera) => {
   }
 
   const saveAsPngAndRefresh = () => {
-    saveAsPng();
+    // saveAsPng();
     clearInterval(nIntervId);
     nIntervId = null;
     location.reload();
   }
 
-  // let nIntervId = setInterval(saveAsPngAndRefresh, 5000);
+  // let nIntervId = setInterval(saveAsPngAndRefresh, 15000);
   document.addEventListener('keypress', saveOnPKeyPress);
 }

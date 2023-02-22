@@ -9,7 +9,16 @@ const cuboids = (
   physicsWorld,
   envMap,
   colorComposition,
+  props
 ) => {
+
+  const {
+    spreadWidth,
+    n,
+    widthRange,  widthMin,
+    heightRange, heightMin,
+    depthRange,  depthMin,
+  } = props;
 
   const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.55);
   const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.55);
@@ -20,11 +29,13 @@ const cuboids = (
     {roughness: 0.25, metalness: 0},
     1
   );
+
   const material_2 = canvasTextureMaterial(
     {...maps_2, envMap},
     {roughness: 0.25, metalness: 0},
     1
   );
+
   const material_3 = canvasTextureMaterial(
     {...maps_3, envMap},
     {roughness: 0.25, metalness: 0},
@@ -32,29 +43,30 @@ const cuboids = (
   );
 
   const materials = [material_1, material_2, material_3];
-  
-  const spreadWidth = 10;
 
-  for (let i = 0; i < 240; i++) {
+  for (let i = 0; i < n; i++) {
     const randomSeed = fxrand();
     const materialIndex = Math.round((materials.length - 1) * randomSeed)
     const material = materials[materialIndex];
 
     const size = {
-      width:  fxrand() * 0.12 + 0.02,
-      height: fxrand() * 0.12 + 0.02,
-      depth:  fxrand() * 1.2   + 0.6
+      width:  fxrand() *  widthRange  + widthMin,
+      height: fxrand() * heightRange + heightMin,
+      depth:  fxrand() *  depthRange  + depthMin
     }
+
     const translation = {
       x: fxrand() * spreadWidth - spreadWidth/2,
       y: fxrand() * spreadWidth - spreadWidth/2,
       z: fxrand() * spreadWidth - spreadWidth/2
     }
+
     const rotation = {
       x: MathUtils.degToRad(fxrand() * 360),
       y: MathUtils.degToRad(fxrand() * 360),
       z: MathUtils.degToRad(fxrand() * 360),
     }
+    
     const cubeItem = cube(material, size, translation, rotation, physicsWorld);
     scene.add(cubeItem.mesh);
     loop.bodies.push(cubeItem);

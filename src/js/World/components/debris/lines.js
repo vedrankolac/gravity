@@ -5,21 +5,28 @@ export const lines = (
   scene,
   loop,
   physicsWorld,
-  colorComposition
+  colorComposition,
+  props
 ) => {
+  const {
+    spreadWidth,
+    n,
+    lengthRange,
+    lengthMin
+  } = props;
+
   const colors = [
     colorComposition.a.color,
     colorComposition.b.color,
     colorComposition.c.color
   ];
-  const spreadWidth = 10;
 
-  for (let i = 0; i < 64; i++) {
+  for (let i = 0; i < n; i++) {
     const randomSeed = fxrand();
     const colorIndex = Math.round((colors.length - 1) * randomSeed);
 
     const size = {
-      length: fxrand() * 2
+      length: fxrand() * lengthRange + lengthMin
     }
     const translation = {
       x: fxrand() * spreadWidth - spreadWidth/2,

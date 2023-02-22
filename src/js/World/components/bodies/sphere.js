@@ -21,7 +21,7 @@ const sphere = (
   mesh.castShadow = true;
   mesh.receiveShadow = true;
 
-  const rigidBodyDesc = RigidBodyDesc.dynamic();
+  const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);
   const q = new Quaternion().setFromEuler(
     new Euler( rotation.x, rotation.y, rotation.z, 'XYZ' )
@@ -36,7 +36,6 @@ const sphere = (
 
   // rigidBody.tick = (delta) => {
   //   console.log('tick sphere');
-  //   initMovement = true;
   //   const ir = 0.0004;
   //   const tir = 0.00001;
   //   rigidBody.applyImpulse({

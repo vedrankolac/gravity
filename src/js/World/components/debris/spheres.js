@@ -7,33 +7,44 @@ const spheres = (
   loop,
   physicsWorld,
   envMap,
-  colorComposition
+  colorComposition,
+  props
 ) => {
+  
+  const {
+    spreadWidth,
+    n,
+    sizeRange,
+    sizeMin
+  } = props;
+
   const colors = [
     colorComposition.a.color,
     colorComposition.b.color,
     colorComposition.c.color
   ];
-  const spreadWidth = 10;
 
-  for (let i = 0; i < 64; i++) {
+  for (let i = 0; i < n; i++) {
     const randomSeed = fxrand();
     const colorIndex = Math.round((colors.length - 1) * randomSeed)
     const material = defaultColorMattPlastic(colors[colorIndex], 1, envMap);
 
     const size = {
-      radius: fxrand()/9 + 0.02
+      radius: fxrand() * sizeRange + sizeMin
     }
+
     const translation = {
       x: fxrand() * spreadWidth - spreadWidth/2,
       y: fxrand() * spreadWidth - spreadWidth/2,
       z: fxrand() * spreadWidth - spreadWidth/2
     }
+
     const rotation = {
       x: MathUtils.degToRad(fxrand() * 360),
       y: MathUtils.degToRad(fxrand() * 360),
       z: MathUtils.degToRad(fxrand() * 360),
     }
+    
     const sphereItem = sphere(material, size, translation, rotation, physicsWorld);
     scene.add(sphereItem.mesh);
     loop.bodies.push(sphereItem);

@@ -21,6 +21,7 @@ class Loop {
     this.accumulator = 0;
     this.stopBodyCounter = 0;
     this.allBodiesStopped = false;
+    this.collideTimer = 0;
     document.addEventListener('keypress', this.togglePhysicsEngine);
   }
 

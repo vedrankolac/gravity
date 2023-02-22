@@ -8,21 +8,28 @@ const planes = (
   physicsWorld,
   envMap,
   colorComposition,
+  props
 ) => {
+  const {
+    spreadWidth,
+    n,
+    widthRange,  widthMin,
+    heightRange, heightMin
+  } = props;
+
   const colors = [
     colorComposition.a.color,
     colorComposition.b.color,
     colorComposition.c.color
   ];
-  const spreadWidth = 8;
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < n; i++) {
     const randomSeed = fxrand();
     const colorIndex = Math.round((colors.length - 1) * randomSeed)
     const material = defaultColorMattPlastic(colors[colorIndex], 1, envMap);
     const size = {
-      width:  fxrand() * 10 + 2,
-      height: fxrand() * 8 + 1,
+      width:  fxrand() * widthRange  +  widthMin,
+      height: fxrand() * heightRange + heightMin,
       depth:  0.02
     }
     const translation = {
