@@ -123,7 +123,7 @@ class World {
       this.colorComposition,
       {
         spreadWidth: 10,
-        n: 224,
+        n: 256,
         widthRange:  0.12,  widthMin: 0.02,
         heightRange: 0.12, heightMin: 0.02,
         depthRange:  1.4 ,  depthMin: 0.6,
@@ -174,7 +174,7 @@ class World {
       }
     );
 
-    this.planes = planes(
+    this.planesSmall = planes(
       this.scene,
       this.loop,
       this.physicsWorld,

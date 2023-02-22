@@ -8,11 +8,11 @@ const createCamera = () => {
   // camera.position.y = 9;
   // camera.position.z = 9;
 
-  // const radius  = fxrand()*15+9;
-  const radius  = 25;
+  const radius  = fxrand()*11+19;
+  // const radius  = 25;
 
-  // const polar   = MathUtils.degToRad(fxrand()*45+30);
-  const polar   = MathUtils.degToRad(60);
+  const polar   = MathUtils.degToRad(fxrand()*360);
+  // const polar   = MathUtils.degToRad(60);
 
   // const equator = MathUtils.degToRad(fxrand()*60+15);
   const equator = MathUtils.degToRad(15);
