@@ -2,7 +2,9 @@ import {
   BoxGeometry,
   Mesh,
   Quaternion,
-  Euler
+  Euler,
+  WireframeGeometry,
+  LineSegments
 } from 'three';
 import {
   RigidBodyDesc,
@@ -39,10 +41,14 @@ export const bullet = (
     heightSegments,
     depthSegments
   );
+
+  // const wireframe = new WireframeGeometry( geometry );
+  // const mesh = new LineSegments( wireframe );
+
   const mesh = new Mesh( geometry, material );
-  // mesh.castShadow = true;
-  // mesh.receiveShadow = true;
-  mesh.visible = false;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  // mesh.visible = false;
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
   const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);

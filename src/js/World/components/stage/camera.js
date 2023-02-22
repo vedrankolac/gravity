@@ -19,7 +19,7 @@ const createCamera = () => {
   // left - right
   // const equator = MathUtils.degToRad(fxrand()*60+15);
   const side = fxrand();
-  const equator = (side > 0.5) ? MathUtils.degToRad(175) : MathUtils.degToRad(15);
+  const equator = (side > 0.5) ? MathUtils.degToRad(195) : MathUtils.degToRad(15);
 
   const cameraVector = new Vector3();
   cameraVector.setFromSphericalCoords(radius, polar, equator);
