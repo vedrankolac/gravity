@@ -88,7 +88,6 @@ class Loop {
       });
       this.allBodiesStopped = true;
     };
-
   }
 
   tick() {
@@ -109,20 +108,28 @@ class Loop {
 
       // now update threejs items
       this.bodies.forEach(body => {
-        const position = body.rigidBody.translation();
-        const rotation = body.rigidBody.rotation();
+        if (body.rigidBody) {
+          const position = body.rigidBody.translation();
+          const rotation = body.rigidBody.rotation();
 
-        body.mesh.position.x = position.x;
-        body.mesh.position.y = position.y;
-        body.mesh.position.z = position.z;
+          body.mesh.position.x = position.x;
+          body.mesh.position.y = position.y;
+          body.mesh.position.z = position.z;
 
-        body.mesh.setRotationFromQuaternion(
-          new Quaternion(
-            rotation.x,
-            rotation.y,
-            rotation.z,
-            rotation.w
-          ));
+          body.mesh.setRotationFromQuaternion(
+            new Quaternion(
+              rotation.x,
+              rotation.y,
+              rotation.z,
+              rotation.w
+            ));
+          
+          if (position.x < -20 && body.mesh.name === 'bullet') {
+            this.physicsWorld.removeRigidBody(body.rigidBody);
+            body.mesh.visible = false;
+            body.rigidBody = null;
+          }
+        }
       });
 
       // no kinematics since we are running a deterministic simulation

@@ -50,6 +50,7 @@ export const bullet = (
   mesh.castShadow = true;
   mesh.receiveShadow = true;
   mesh.visible = isVisible;
+  mesh.name = 'bullet';
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
   const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
