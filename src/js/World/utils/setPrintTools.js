@@ -26,6 +26,6 @@ export const setPrintTools = (renderer, scene, camera) => {
     location.reload();
   }
 
-  let nIntervId = setInterval(saveAsPngAndRefresh, 18000);
+  // let nIntervId = setInterval(saveAsPngAndRefresh, 18000);
   document.addEventListener('keypress', saveOnPKeyPress);
 }
