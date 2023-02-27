@@ -1,4 +1,6 @@
 import { hslToHex } from "../../../utils/colorUtils";
+import { shuffle } from "../../../utils/arrayFxRnd"
+
 
 const colorComposer = () => {
   const colorCompositionID = fxrand();
@@ -76,7 +78,7 @@ const colorComposer = () => {
       envMapIntensity
     };
 
-    const randomized = [a,b,c].sort(() => fxrand() - 0.5);
+    const randomized = shuffle([a,b,c]);
     return {
       a: randomized[0],
       b: randomized[1],
@@ -115,7 +117,7 @@ const colorComposer = () => {
       envMapIntensity
     };
 
-    const randomized = [a,b,c].sort(() => fxrand() - 0.5);
+    const randomized = shuffle([a,b,c]);
     return {
       a: randomized[0],
       b: randomized[1],
@@ -163,11 +165,11 @@ const colorComposer = () => {
       envMapIntensity
     };
 
-    const randomized = [a,b,c].sort(() => fxrand() - 0.5);
+    const randomized = shuffle([a,b,c]);
 
     const bg1 = black;
     const bg2 = white;
-    const randomizedBg = [a,b,c,bg1,bg2].sort(() => fxrand() - 0.5);
+    const randomizedBg = shuffle([a,b,c,bg1,bg2]);
 
     return {
       a: randomized[0],
@@ -204,11 +206,11 @@ const colorComposer = () => {
       envMapIntensity
     };
 
-    const randomized = [a,b,c].sort(() => fxrand() - 0.5);
+    const randomized = shuffle([a,b,c]);
 
     const bg1 = black;
     const bg2 = white;
-    const randomizedBg = [a,b,c,bg1,bg2].sort(() => fxrand() - 0.5);
+    const randomizedBg = shuffle([a,b,c,bg1,bg2]);
 
     return {
       a: randomized[0],
