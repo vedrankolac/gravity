@@ -96,7 +96,7 @@ class World {
   }
 
   buildMainComposition(envMap) {
-    this.spheres = spheres(
+    this.spheresMid = spheres(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -110,7 +110,7 @@ class World {
       }
     );
 
-    this.smallSpheres = spheres(
+    this.spheresSmall = spheres(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -169,7 +169,7 @@ class World {
       }
     );
 
-    this.planes = planes(
+    this.planesLarge = planes(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -210,7 +210,7 @@ class World {
       }
     );
 
-    this.tinyLines = lines(
+    this.linesTiny = lines(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -222,8 +222,10 @@ class World {
         lengthMin: 0.01
       }
     );
+  }
 
-    this.bulletsSmall = bullets(
+  buildDebris(envMap) {
+    this.debrisSmallBegin = bullets(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -240,7 +242,7 @@ class World {
       }
     );
 
-    this.bulletsMid = bullets(
+    this.debrisMidBeforeObjects = bullets(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -256,10 +258,8 @@ class World {
         isVisible: true
       }
     );
-  }
 
-  buildDebris(envMap) {
-    this.bullets = bullets(
+    this.debrisFewObjects = bullets(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -276,7 +276,7 @@ class World {
       }
     );
 
-    this.bulletsSmallEnd = bullets(
+    this.debrisSmallEnd = bullets(
       this.scene,
       this.loop,
       this.physicsWorld,
