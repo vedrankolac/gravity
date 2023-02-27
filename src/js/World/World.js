@@ -75,6 +75,7 @@ class World {
     const engineGravity = new Vector3(0.0, -this.gravity, 0.0);
     this.physicsWorld = new RWorld(engineGravity);
     this.physicsWorld.timestep = this.dt;
+    // this.physicsWorld.integrationParameters.maxCcdSubsteps = 1.2;
     this.loop.setPhysics(this.physicsWorld);
     this.room = roomPhysicsComposition(this.physicsWorld, this.floorSize, false);
     this.handsPhysicsController = this.xrEnabled ? createHandsPhysicsController(this.scene, this.loop, this.physicsWorld, this.vrControls) : null;
@@ -87,6 +88,14 @@ class World {
     // this.materialTester      = materialTester(this.scene, envMap);
     // this.lightTester         = lightTester(this.scene, envMap);
 
+    this.buildMainComposition(envMap);
+    this.buildDebris(envMap);
+
+    this.walls = walls(this.scene, this.floorSize, this.bgHSL, this.bgColor);
+    // this.orbitControls.target = this.pendulum.handleB.mesh.position;
+  }
+
+  buildMainComposition(envMap) {
     this.spheres = spheres(
       this.scene,
       this.loop,
@@ -214,10 +223,75 @@ class World {
       }
     );
 
-    this.bullets             = bullets(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
-    this.walls               = walls(this.scene, this.floorSize, this.bgHSL, this.bgColor);
+    this.bulletsSmall = bullets(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      {
+        spreadWidth: 11,
+        nRange: 40, nMin: 240,
+        xRange: 800, xMin: 1800,
+        widthRange:  0.04,  widthMin: 0.02,
+        heightRange: 0.04, heightMin: 0.02,
+        depthRange:  0.04,  depthMin: 0.02,
+        impulse: -220,
+        isVisible: true
+      }
+    );
 
-    // this.orbitControls.target = this.pendulum.handleB.mesh.position;
+    this.bulletsMid = bullets(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      {
+        spreadWidth: 11,
+        nRange: 20, nMin: 40,
+        xRange: 600, xMin: 2200,
+        widthRange:  0.1,  widthMin: 0.02,
+        heightRange: 0.1, heightMin: 0.02,
+        depthRange:  0.1,  depthMin: 0.02,
+        impulse: -220,
+        isVisible: true
+      }
+    );
+  }
+
+  buildDebris(envMap) {
+    this.bullets = bullets(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      {
+        spreadWidth: 9,
+        nRange: 4, nMin: 4,
+        xRange: 600, xMin: 2600,
+        widthRange:  0,  widthMin: 1.4,
+        heightRange: 0, heightMin: 0.6,
+        depthRange:  0,  depthMin: 0.4,
+        impulse: -220,
+        isVisible: true
+      }
+    );
+
+    this.bulletsSmallEnd = bullets(
+      this.scene,
+      this.loop,
+      this.physicsWorld,
+      envMap,
+      {
+        spreadWidth: 11,
+        nRange: 40, nMin: 120,
+        xRange: 600, xMin: 3200,
+        widthRange:  0.04,  widthMin: 0.02,
+        heightRange: 0.04, heightMin: 0.02,
+        depthRange:  0.04,  depthMin: 0.02,
+        impulse: -220,
+        isVisible: true
+      }
+    );
   }
 
   start() {

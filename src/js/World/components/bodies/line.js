@@ -32,7 +32,7 @@ export const line = (
   mesh.castShadow = true;
   mesh.receiveShadow = true;
 
-  const rigidBodyDesc = RigidBodyDesc.dynamic();
+  const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);
   const q = new Quaternion().setFromEuler(
     new Euler( rotation.x, rotation.y, rotation.z, 'XYZ' )

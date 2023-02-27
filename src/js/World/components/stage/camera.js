@@ -10,7 +10,7 @@ const createCamera = () => {
 
   // center distance
   const radius  = fxrand() * 6 + 22;
-  // const radius  = 60;
+  // const radius  = 40;
 
   // up - down
   const polar   = MathUtils.degToRad(fxrand()*10 + 85);
@@ -19,6 +19,7 @@ const createCamera = () => {
   const angle = MathUtils.degToRad(fxrand() * 30 + 70);
   const side = fxrand;
   const equator = (side > 0.5) ? angle : angle * -1;
+  // const equator = MathUtils.degToRad(0);
 
   const cameraVector = new Vector3();
   cameraVector.setFromSphericalCoords(radius, polar, equator);

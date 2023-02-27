@@ -8,11 +8,21 @@ export const bullets = (
   loop,
   physicsWorld,
   envMap,
-  colorComposition
+  props
 ) => {
 
-  const spreadWidth = 9;
-  const bulletNum = Math.round(6 * fxrand()) + 4;
+  const {
+    spreadWidth,
+    nRange, nMin,
+    xRange, xMin,
+    widthRange,  widthMin,
+    heightRange, heightMin,
+    depthRange,  depthMin,
+    impulse,
+    isVisible
+  } = props;
+
+  const bulletNum = Math.round(nRange * fxrand()) + nMin;
   console.log('bulletNum:', bulletNum);
 
   for (let i = 0; i < bulletNum; i++) {
@@ -20,13 +30,13 @@ export const bullets = (
     const material = defaultColorMattPlastic(color, 1, envMap);
 
     const size = {
-      width:  1.4,
-      height: 0.6,
-      depth:  0.4
+      width:  fxrand() *  widthRange  + widthMin,
+      height: fxrand() * heightRange + heightMin,
+      depth:  fxrand() *  depthRange  + depthMin
     }
 
     const translation = {
-      x: fxrand() * 900 + 1200,
+      x: fxrand() * xRange + xMin,
       y: fxrand() * spreadWidth - spreadWidth/2,
       z: fxrand() * spreadWidth - spreadWidth/2
     }
@@ -36,12 +46,19 @@ export const bullets = (
       y: MathUtils.degToRad(fxrand() * 360),
       z: MathUtils.degToRad(fxrand() * 360),
     }
-    const cubeItem = bullet(material, size, translation, rotation, physicsWorld);
+    const cubeItem = bullet(material, size, translation, rotation, isVisible, physicsWorld);
 
     cubeItem.rigidBody.tick = (delta) => {
       // console.log('tick bullet');
-      cubeItem.rigidBody.applyImpulse({
-        x: -80,
+
+      // cubeItem.rigidBody.applyImpulse({
+      //   x: impulse,
+      //   y: 0,
+      //   z: 0
+      // }, true);
+
+      cubeItem.rigidBody.setLinvel({
+        x: impulse,
         y: 0,
         z: 0
       }, true);

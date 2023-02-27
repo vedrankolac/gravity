@@ -17,6 +17,7 @@ export const bullet = (
     size,
     translation,
     rotation,
+    isVisible,
     physicsWorld,
     widthSegments = 1,
     heightSegments = 1,
@@ -48,7 +49,7 @@ export const bullet = (
   const mesh = new Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
-  // mesh.visible = false;
+  mesh.visible = isVisible;
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
   const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
