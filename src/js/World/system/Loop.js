@@ -1,5 +1,4 @@
 import { Clock, Quaternion, Vector2 } from 'three';
-import { mapNumber } from '../utils/numUtils';
 
 class Loop {
   constructor(camera, scene, renderer, composer = null, stats, orbitControls, doPostprocessing, gravity, dt) {
@@ -23,6 +22,8 @@ class Loop {
     this.allBodiesStopped = false;
     this.collideTimer = 0;
     document.addEventListener('keypress', this.togglePhysicsEngine);
+    document.addEventListener('visibilitychange', e => this.handleVisibilityChange(e));
+
   }
 
   start() {
@@ -51,10 +52,22 @@ class Loop {
   togglePhysicsEngine = (e) => {
     if (e.code === 'KeyR') {
       if (this.runPhysics === true) {
+        this.clock.stop();
         this.runPhysics = false;
       } else {
+        this.clock.start();
         this.runPhysics = true;
       }
+    }
+  }
+
+  handleVisibilityChange(e) {
+    if (document.visibilityState === 'hidden') {
+      this.clock.stop();
+      this.stop();
+    } else {
+      this.clock.start();
+      this.start();
     }
   }
 
@@ -71,7 +84,7 @@ class Loop {
     // stop all the bodies and them run tick on them only once
     // bodies are stopped by setting zero force on all of them until they are placed so they are not overlapping in space
     // looks like doing this in 6 steps is enough to acchive this result
-    if (this.stopBodyCounter < this.bodies.length*8) {
+    if (this.stopBodyCounter < this.bodies.length*6) {
       this.bodies.forEach(body => {
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
@@ -124,11 +137,11 @@ class Loop {
               rotation.w
             ));
           
-          if (position.x < -20 && body.mesh.name === 'bullet') {
-            this.physicsWorld.removeRigidBody(body.rigidBody);
-            body.mesh.visible = false;
-            body.rigidBody = null;
-          }
+          // if (position.x < -20 && body.mesh.name === 'bullet') {
+          //   this.physicsWorld.removeRigidBody(body.rigidBody);
+          //   body.mesh.visible = false;
+          //   body.rigidBody = null;
+          // }
         }
       });
 
