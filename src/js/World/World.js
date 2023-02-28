@@ -124,7 +124,7 @@ class World {
       }
     );
 
-    this.cuboidsLong = cuboids(
+    this.sticks = cuboids(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -135,26 +135,26 @@ class World {
         n: 256,
         widthRange:  0.12,  widthMin: 0.02,
         heightRange: 0.12, heightMin: 0.02,
-        depthRange:  1.4 ,  depthMin: 0.6,
+        depthRange:  1.6 ,  depthMin: 0.5,
       }
     );
 
-    this.cuboidsMid = cuboids(
+    this.cubesMid = cuboids(
       this.scene,
       this.loop,
       this.physicsWorld,
       envMap,
       this.colorComposition,
       {
-        spreadWidth: 10,
-        n: 12,
+        spreadWidth: 9,
+        n: 16,
         widthRange:  0.4,   widthMin: 0.2,
         heightRange: 0.4,  heightMin: 0.2,
         depthRange:  0.4 ,  depthMin: 0.2,
       }
     );
 
-    this.cuboidsLarge = cuboids(
+    this.cubesLarge = cuboids(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -176,8 +176,8 @@ class World {
       envMap,
       this.colorComposition,
       {
-        spreadWidth: 10,
-        n: 3,
+        spreadWidth: 14,
+        n: 4,
         widthRange:  10,   widthMin: 2,
         heightRange:  8,  heightMin: 1,
       }
@@ -190,8 +190,8 @@ class World {
       envMap,
       this.colorComposition,
       {
-        spreadWidth: 10,
-        n: 4,
+        spreadWidth: 8,
+        n: 6,
         widthRange:  2.4,   widthMin: 0.6,
         heightRange: 3,  heightMin: 1,
       }
@@ -205,7 +205,7 @@ class World {
       {
         spreadWidth: 14,
         n: 48,
-        lengthRange: 3,
+        lengthRange: 2.4,
         lengthMin: 0.1
       }
     );
@@ -231,9 +231,9 @@ class World {
       this.physicsWorld,
       envMap,
       {
-        spreadWidth: 11,
-        nRange: 40, nMin: 240,
-        xRange: 800, xMin: 1800,
+        spreadWidth: 12,
+        nRange: 40, nMin: 320,
+        xRange: 600, xMin: 1800,
         widthRange:  0.04,  widthMin: 0.02,
         heightRange: 0.04, heightMin: 0.02,
         depthRange:  0.04,  depthMin: 0.02,
@@ -242,14 +242,14 @@ class World {
       }
     );
 
-    this.debrisMidBeforeObjects = bullets(
+    this.debrisMid = bullets(
       this.scene,
       this.loop,
       this.physicsWorld,
       envMap,
       {
-        spreadWidth: 11,
-        nRange: 20, nMin: 40,
+        spreadWidth: 12,
+        nRange: 20, nMin: 80,
         xRange: 600, xMin: 2200,
         widthRange:  0.1,  widthMin: 0.02,
         heightRange: 0.1, heightMin: 0.02,
@@ -259,7 +259,7 @@ class World {
       }
     );
 
-    this.debrisFewObjects = bullets(
+    this.debrisLarge = bullets(
       this.scene,
       this.loop,
       this.physicsWorld,
@@ -267,7 +267,7 @@ class World {
       {
         spreadWidth: 9,
         nRange: 4, nMin: 4,
-        xRange: 600, xMin: 2600,
+        xRange: 800, xMin: 2400,
         widthRange:  0,  widthMin: 1.4,
         heightRange: 0, heightMin: 0.6,
         depthRange:  0,  depthMin: 0.4,
@@ -282,9 +282,9 @@ class World {
       this.physicsWorld,
       envMap,
       {
-        spreadWidth: 11,
-        nRange: 40, nMin: 120,
-        xRange: 600, xMin: 3200,
+        spreadWidth: 12,
+        nRange: 20, nMin: 120,
+        xRange: 600, xMin: 2600,
         widthRange:  0.04,  widthMin: 0.02,
         heightRange: 0.04, heightMin: 0.02,
         depthRange:  0.04,  depthMin: 0.02,

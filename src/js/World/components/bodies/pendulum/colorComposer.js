@@ -224,29 +224,29 @@ const colorComposer = () => {
   let colorConfig = null;
   let paleteName = null;
 
-  // if (colorCompositionID < 0.1) {
-  //   // no color - 10%
-  //   colorConfig = grayscale();
-  //   paleteName = grayscale.name;
-  // } else if ((colorCompositionID => 0.1) && (colorCompositionID < 0.35)) {
-  //   // one color - 25%
-  //   colorConfig = whiteBlackColor();
-  //   paleteName = whiteBlackColor.name;
-  // } else if ((colorCompositionID => 0.35) && (colorCompositionID < 0.75)) {
-  //   // two colors - 40%
-  //   colorConfig = duoAndLightness();
-  //   paleteName = duoAndLightness.name;
-  // } else if ((colorCompositionID => 0.75) && (colorCompositionID < 1)) {
-  //   // three colors - 25%
-  //   colorConfig = tripple();
-  //   paleteName = tripple.name;
-  // }
+  if (colorCompositionID < 0.1) {
+    // no color - 10%
+    colorConfig = grayscale();
+    paleteName = grayscale.name;
+  } else if ((colorCompositionID => 0.1) && (colorCompositionID < 0.35)) {
+    // one color - 25%
+    colorConfig = whiteBlackColor();
+    paleteName = whiteBlackColor.name;
+  } else if ((colorCompositionID => 0.35) && (colorCompositionID < 0.75)) {
+    // two colors - 40%
+    colorConfig = duoAndLightness();
+    paleteName = duoAndLightness.name;
+  } else if ((colorCompositionID => 0.75) && (colorCompositionID < 1)) {
+    // three colors - 25%
+    colorConfig = tripple();
+    paleteName = tripple.name;
+  }
 
   // colorConfig = tripple();
   // paleteName = tripple.name;
 
   colorConfig = whiteBlackColor();
-  paleteName = whiteBlackColor.name;
+  paleteName = duoAndLightness.name;
 
   // colorConfig = duoAndLightness();
   // paleteName = duoAndLightness.name;
