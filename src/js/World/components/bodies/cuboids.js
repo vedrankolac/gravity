@@ -1,4 +1,4 @@
-import { cube } from "../bodies/cube";
+import { cube } from "./primitives/cube";
 import { MathUtils } from 'three';
 import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
 import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";

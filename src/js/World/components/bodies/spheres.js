@@ -1,4 +1,4 @@
-import { sphere } from "../bodies/sphere";
+import { sphere } from "./primitives/sphere";
 import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
 import { MathUtils } from "three";
 

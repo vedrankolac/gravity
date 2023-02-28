@@ -1,4 +1,4 @@
-import { line } from "../bodies/line";
+import { line } from "./primitives/line";
 import { MathUtils } from "three";
 
 export const lines = (

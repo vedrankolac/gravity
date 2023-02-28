@@ -2,27 +2,25 @@ import {
   BoxGeometry,
   Mesh,
   Quaternion,
-  Euler,
-  WireframeGeometry,
-  LineSegments
+  Euler
 } from 'three';
 import {
   RigidBodyDesc,
   ColliderDesc
 } from '@dimforge/rapier3d-compat';
-import { shiftHandleUVs } from './pendulum/shiftHandleUVs';
+import { shiftHandleUVs } from '../../../system/shiftHandleUVs';
 
-export const bullet = (
+const plane = (
     material,
     size,
     translation,
     rotation,
-    isVisible,
     physicsWorld,
     widthSegments = 1,
     heightSegments = 1,
     depthSegments = 1
   ) => {
+
   const conf = {
     size: {
       width: size.width,
@@ -30,7 +28,7 @@ export const bullet = (
       depth: size.depth
     },
     extremes: {
-      maxWidth: 1.8
+      maxWidth: 12
     }
   }
 
@@ -42,18 +40,12 @@ export const bullet = (
     heightSegments,
     depthSegments
   );
-
-  // const wireframe = new WireframeGeometry( geometry );
-  // const mesh = new LineSegments( wireframe );
-
   const mesh = new Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
-  mesh.visible = isVisible;
-  mesh.name = 'bullet';
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
-  const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
+  const rigidBodyDesc = RigidBodyDesc.dynamic();
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);
   const q = new Quaternion().setFromEuler(
     new Euler( rotation.x, rotation.y, rotation.z, 'XYZ' )
@@ -66,10 +58,9 @@ export const bullet = (
   physicsWorld.createCollider(collider, rigidBody);
 
   // rigidBody.tick = (delta) => {
-  //   console.log('tick cuboid');
-  //   initMovement = true;
-  //   const ir = 0.002;
-  //   const tir = 0.00002;
+  //   console.log('tick plane');
+  //   const ir = 0.8;
+  //   const tir = 0.6;
   //   rigidBody.applyImpulse({
   //     x: fxrand() * ir - ir/2,
   //     y: fxrand() * ir - ir/2,
@@ -88,3 +79,5 @@ export const bullet = (
     rigidBody: rigidBody
   };
 }
+
+export { plane };

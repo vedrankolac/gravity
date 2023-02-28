@@ -2,19 +2,22 @@ import {
   BoxGeometry,
   Mesh,
   Quaternion,
-  Euler
+  Euler,
+  WireframeGeometry,
+  LineSegments
 } from 'three';
 import {
   RigidBodyDesc,
   ColliderDesc
 } from '@dimforge/rapier3d-compat';
-import { shiftHandleUVs } from './pendulum/shiftHandleUVs';
+import { shiftHandleUVs } from '../../../system/shiftHandleUVs';
 
-const cube = (
+export const bullet = (
     material,
     size,
     translation,
     rotation,
+    isVisible,
     physicsWorld,
     widthSegments = 1,
     heightSegments = 1,
@@ -39,9 +42,15 @@ const cube = (
     heightSegments,
     depthSegments
   );
+
+  // const wireframe = new WireframeGeometry( geometry );
+  // const mesh = new LineSegments( wireframe );
+
   const mesh = new Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
+  mesh.visible = isVisible;
+  mesh.name = 'bullet';
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
   const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
@@ -79,5 +88,3 @@ const cube = (
     rigidBody: rigidBody
   };
 }
-
-export { cube };

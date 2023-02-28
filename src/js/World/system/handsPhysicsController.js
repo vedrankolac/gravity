@@ -1,5 +1,5 @@
-import { sphereKinematic } from '../components/bodies/sphereKinematic';
-import { cubeKinematic } from '../components/bodies/cubeKinematic';
+import { sphereKinematic } from '../components/bodies/primitives/sphereKinematic';
+import { cubeKinematic } from '../components/bodies/primitives/cubeKinematic';
 import { hslToHex } from '../utils/colorUtils';
 import { defaultColorShinyPlastic } from '../components/materials/defaultColorShinyPlastic';
 

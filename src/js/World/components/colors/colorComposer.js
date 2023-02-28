@@ -1,5 +1,5 @@
-import { hslToHex } from "../../../utils/colorUtils";
-import { shuffle } from "../../../utils/arrayFxRnd"
+import { hslToHex } from "../../utils/colorUtils";
+import { shuffle } from "../../utils/arrayFxRnd"
 
 
 const colorComposer = () => {

@@ -1,4 +1,4 @@
-import { bullet } from "../bodies/bullet";
+import { bullet } from "./primitives/bullet";
 import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
 import { MathUtils } from "three";
 import { hslToHex } from "../../utils/colorUtils";

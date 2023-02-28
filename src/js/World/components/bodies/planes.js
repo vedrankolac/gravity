@@ -1,4 +1,4 @@
-import { plane } from "../bodies/plane";
+import { plane } from "./primitives/plane";
 import { MathUtils } from 'three';
 import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
 import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";

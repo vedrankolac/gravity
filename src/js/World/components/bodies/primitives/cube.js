@@ -8,9 +8,9 @@ import {
   RigidBodyDesc,
   ColliderDesc
 } from '@dimforge/rapier3d-compat';
-import { shiftHandleUVs } from './pendulum/shiftHandleUVs';
+import { shiftHandleUVs } from '../../../system/shiftHandleUVs';
 
-const plane = (
+const cube = (
     material,
     size,
     translation,
@@ -20,7 +20,6 @@ const plane = (
     heightSegments = 1,
     depthSegments = 1
   ) => {
-
   const conf = {
     size: {
       width: size.width,
@@ -28,7 +27,7 @@ const plane = (
       depth: size.depth
     },
     extremes: {
-      maxWidth: 12
+      maxWidth: 1.8
     }
   }
 
@@ -45,7 +44,7 @@ const plane = (
   mesh.receiveShadow = true;
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
-  const rigidBodyDesc = RigidBodyDesc.dynamic();
+  const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);
   const q = new Quaternion().setFromEuler(
     new Euler( rotation.x, rotation.y, rotation.z, 'XYZ' )
@@ -58,9 +57,10 @@ const plane = (
   physicsWorld.createCollider(collider, rigidBody);
 
   // rigidBody.tick = (delta) => {
-  //   console.log('tick plane');
-  //   const ir = 0.8;
-  //   const tir = 0.6;
+  //   console.log('tick cuboid');
+  //   initMovement = true;
+  //   const ir = 0.002;
+  //   const tir = 0.00002;
   //   rigidBody.applyImpulse({
   //     x: fxrand() * ir - ir/2,
   //     y: fxrand() * ir - ir/2,
@@ -80,4 +80,4 @@ const plane = (
   };
 }
 
-export { plane };
+export { cube };
