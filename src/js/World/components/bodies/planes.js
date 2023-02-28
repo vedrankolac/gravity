@@ -36,7 +36,7 @@ const planes = (
     return fxrand() * 0.75;
   }
 
-  console.log('+ ', colorComposition.a.color);
+  // console.log('+ ', colorComposition.a.color);
 
   const material_1 = canvasTextureMaterial(
     {envMap},

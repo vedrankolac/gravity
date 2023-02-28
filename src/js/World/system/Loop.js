@@ -1,4 +1,5 @@
-import { Clock, Quaternion, Vector2 } from 'three';
+import { Clock, LoadingManager, Quaternion, Vector2 } from 'three';
+import { EventQueue } from '@dimforge/rapier3d-compat';
 
 class Loop {
   constructor(camera, scene, renderer, composer = null, stats, orbitControls, doPostprocessing, gravity, dt) {
@@ -115,7 +116,13 @@ class Loop {
       while (this.accumulator >= this.dt) {
         // before making step in engine, run all the code that deals with updates to ensure we have a deterministic simulation
         this.updatePhysicsObjects();
+
+        // let eventQueue = new EventQueue(true);
         this.physicsWorld.step();
+        // eventQueue.drainCollisionEvents((handle1, handle2, started) => {
+        //   console.log('+++ ', handle1, handle2, started);
+        // });
+
         this.accumulator -= this.dt;
       }
 
@@ -136,6 +143,13 @@ class Loop {
               rotation.z,
               rotation.w
             ));
+
+          // if (body.collider.intname === 'large-bullet') {
+          //   console.log('large-bullet', body.collider);
+          //   this.physicsWorld.contactsWith(body.collider, (otherCollider) => {
+          //     console.log('+ ', otherCollider);
+          //   });
+          // }
           
           // if (position.x < -20 && body.mesh.name === 'bullet') {
           //   this.physicsWorld.removeRigidBody(body.rigidBody);

@@ -8,7 +8,8 @@ import {
 } from 'three';
 import {
   RigidBodyDesc,
-  ColliderDesc
+  ColliderDesc,
+  ActiveEvents
 } from '@dimforge/rapier3d-compat';
 import { shiftHandleUVs } from '../../../system/shiftHandleUVs';
 
@@ -18,6 +19,7 @@ export const bullet = (
     translation,
     rotation,
     isVisible,
+    name,
     physicsWorld,
     widthSegments = 1,
     heightSegments = 1,
@@ -49,7 +51,7 @@ export const bullet = (
   const mesh = new Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
-  mesh.visible = isVisible;
+  // mesh.visible = isVisible;
   mesh.name = 'bullet';
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
@@ -62,6 +64,10 @@ export const bullet = (
 
   const rigidBody = physicsWorld.createRigidBody(rigidBodyDesc);
   const collider = ColliderDesc.cuboid(size.width / 2, size.height / 2, size.depth / 2);
+  
+  // const collider = ColliderDesc.cuboid(size.width / 2, size.height / 2, size.depth / 2).setActiveEvents(ActiveEvents.COLLISION_EVENTS);
+  collider.intname = name;
+  // collider.mesh = mesh;
 
   physicsWorld.createCollider(collider, rigidBody);
 

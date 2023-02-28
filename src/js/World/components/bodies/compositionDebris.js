@@ -19,7 +19,8 @@ export const compositionDebris = (
       heightRange: 0.04, heightMin: 0.02,
       depthRange:  0.04,  depthMin: 0.02,
       impulse: -220,
-      isVisible: true
+      isVisible: true,
+      name: ''
     }
   );
 
@@ -36,7 +37,8 @@ export const compositionDebris = (
       heightRange: 0.1, heightMin: 0.02,
       depthRange:  0.1,  depthMin: 0.02,
       impulse: -220,
-      isVisible: true
+      isVisible: true,
+      name: ''
     }
   );
 
@@ -53,7 +55,8 @@ export const compositionDebris = (
       heightRange: 0, heightMin: 0.6,
       depthRange:  0,  depthMin: 0.4,
       impulse: -220,
-      isVisible: true
+      isVisible: true,
+      name: 'large-bullet'
     }
   );
 
@@ -70,7 +73,8 @@ export const compositionDebris = (
       heightRange: 0.04, heightMin: 0.02,
       depthRange:  0.04,  depthMin: 0.02,
       impulse: -220,
-      isVisible: true
+      isVisible: true,
+      name: ''
     }
   );
 }

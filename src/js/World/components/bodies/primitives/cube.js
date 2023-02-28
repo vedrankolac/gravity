@@ -6,7 +6,8 @@ import {
 } from 'three';
 import {
   RigidBodyDesc,
-  ColliderDesc
+  ColliderDesc,
+  ActiveEvents
 } from '@dimforge/rapier3d-compat';
 import { shiftHandleUVs } from '../../../system/shiftHandleUVs';
 
