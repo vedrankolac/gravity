@@ -1,6 +1,7 @@
 import { plane } from "../bodies/plane";
-import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
 import { MathUtils } from 'three';
+import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
+import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";
 
 const planes = (
   scene,
@@ -23,10 +24,45 @@ const planes = (
     colorComposition.c.color
   ];
 
+  // const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.1);
+  // const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.1);
+  // const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.1);
+
+  const rndR = () => {
+    return fxrand() * 0.85;
+  }
+
+  const rndM = () => {
+    return fxrand() * 0.75;
+  }
+
+  console.log('+ ', colorComposition.a.color);
+
+  const material_1 = canvasTextureMaterial(
+    {envMap},
+    {roughness: rndR(), metalness: rndM(), color: colorComposition.a.color},
+    1
+  );
+
+  const material_2 = canvasTextureMaterial(
+    {envMap},
+    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    1
+  );
+
+  const material_3 = canvasTextureMaterial(
+    {envMap},
+    {roughness: rndR(), metalness: rndM(), color: colorComposition.c.color},
+    1
+  );
+
+  const materials = [material_1, material_2, material_3];
+
   for (let i = 0; i < n; i++) {
     const randomSeed = fxrand();
-    const colorIndex = Math.round((colors.length - 1) * randomSeed)
-    const material = defaultColorMattPlastic(colors[colorIndex], 1, envMap);
+    const materialIndex = Math.round((materials.length - 1) * randomSeed)
+    const material = materials[materialIndex];
+
     const size = {
       width:  fxrand() * widthRange  +  widthMin,
       height: fxrand() * heightRange + heightMin,
