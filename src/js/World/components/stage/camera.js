@@ -13,11 +13,11 @@ const createCamera = () => {
   // const radius  = 40;
 
   // up - down
-  const polar   = MathUtils.degToRad(fxrand()*10 + 85);
+  const polar   = MathUtils.degToRad(fxrand() * 20 + 70);
 
   // left - right
   const angle = MathUtils.degToRad(fxrand() * 30 + 70);
-  const side = fxrand;
+  const side = fxrand();
   const equator = (side > 0.5) ? angle : angle * -1;
   // const equator = MathUtils.degToRad(0);
 
