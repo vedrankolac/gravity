@@ -15,7 +15,7 @@ const createLights = scene => {
   // setting lower mapSize makes it much faster on iPhone 12 Pro Max
   // const spot = new SpotLight(0xffffff, 840);
 
-  const sphereSize = 0.4;
+  // const sphereSize = 0.4;
 
   // const pointA = new PointLight(0x404040, 10);
   // pointA.position.set(-10, 10, 0);
@@ -52,11 +52,11 @@ const createLights = scene => {
 
   map.colorMap = null;
 
-  const light = new AmbientLight(0x404040, 3.4); // soft white light
-  scene.add(light);
+  const ambient = new AmbientLight(0x404040, 3.4); // soft white light
+  scene.add(ambient);
 
   // const gui = new GUI();
-  // gui.add(spot, 'intensity', 600.0, 1200.0 );
+  // gui.add(ambient, 'intensity', 0, 6 );
 }
 
 export { createLights };
