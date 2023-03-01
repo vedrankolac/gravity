@@ -5,8 +5,8 @@ const createCamera = () => {
   const camera = new PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.1, 400 );
 
   // center distance
-  const radius  = fxrand() * 6 + 22;
-  // const radius  = 40;
+  const radius  = fxrand() * 6 + 20;
+  // const radius  = 20;
 
   // up - down
   const polar   = MathUtils.degToRad(fxrand() * 20 + 70);
