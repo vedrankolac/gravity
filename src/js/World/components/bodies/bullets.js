@@ -1,13 +1,13 @@
 import { bullet } from "./primitives/bullet";
-import { defaultColorMattPlastic } from "../materials/defaultColorMattPlastic";
 import { MathUtils } from "three";
-import { hslToHex } from "../../utils/colorUtils";
+import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
 
 export const bullets = (
   scene,
   loop,
   physicsWorld,
   envMap,
+  colorComposition,
   props
 ) => {
 
@@ -26,9 +26,38 @@ export const bullets = (
   const bulletNum = Math.round(nRange * fxrand()) + nMin;
   console.log('bulletNum:', bulletNum);
 
+  const rndR = () => {
+    return fxrand() * 0.85;
+  }
+
+  const rndM = () => {
+    return fxrand() * 0.25;
+  }
+
+  const material_1 = canvasTextureMaterial(
+    {envMap},
+    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    1
+  );
+
+  const material_2 = canvasTextureMaterial(
+    {envMap},
+    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    1
+  );
+
+  const material_3 = canvasTextureMaterial(
+    {envMap},
+    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    1
+  );
+
+  const materials = [material_1, material_2, material_3];
+
   for (let i = 0; i < bulletNum; i++) {
-    const color = hslToHex(0, 0, 0.04);
-    const material = defaultColorMattPlastic(color, 1, envMap);
+    const randomSeed = fxrand();
+    const materialIndex = Math.round((materials.length - 1) * randomSeed)
+    const material = materials[materialIndex];
 
     const size = {
       width:  fxrand() *  widthRange  + widthMin,

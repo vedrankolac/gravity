@@ -1,7 +1,6 @@
 import { plane } from "./primitives/plane";
 import { MathUtils } from 'three';
 import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
-import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";
 
 const planes = (
   scene,
@@ -9,6 +8,7 @@ const planes = (
   physicsWorld,
   envMap,
   colorComposition,
+  colorBalance,
   props
 ) => {
   const {
@@ -18,16 +18,6 @@ const planes = (
     heightRange, heightMin
   } = props;
 
-  const colors = [
-    colorComposition.a.color,
-    colorComposition.b.color,
-    colorComposition.c.color
-  ];
-
-  // const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.1);
-  // const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.1);
-  // const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.1);
-
   const rndR = () => {
     return fxrand() * 0.85;
   }
@@ -35,8 +25,6 @@ const planes = (
   const rndM = () => {
     return fxrand() * 0.75;
   }
-
-  // console.log('+ ', colorComposition.a.color);
 
   const material_1 = canvasTextureMaterial(
     {envMap},
@@ -59,9 +47,21 @@ const planes = (
   const materials = [material_1, material_2, material_3];
 
   for (let i = 0; i < n; i++) {
-    const randomSeed = fxrand();
-    const materialIndex = Math.round((materials.length - 1) * randomSeed)
+    const mSeed = fxrand();
+    let materialIndex = 0;
+    if (mSeed > colorBalance.cb1) {
+      const miSeed = fxrand();
+      if (miSeed < colorBalance.cb2) {
+        materialIndex = 1;
+      } else {
+        materialIndex = 2;
+      }
+    }
     const material = materials[materialIndex];
+
+    // const randomSeed = fxrand();
+    // const materialIndex = Math.round((materials.length - 1) * randomSeed)
+    // const material = materials[materialIndex];
 
     const size = {
       width:  fxrand() * widthRange  +  widthMin,

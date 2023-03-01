@@ -88,7 +88,7 @@ class World {
     this.compMain = compositionMain(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
     this.compDebris = compositionDebris(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
 
-    this.walls = walls(this.scene, this.floorSize, this.bgHSL, this.bgColor);
+    this.walls = walls(this.scene, this.floorSize, this.bgColor);
     // this.orbitControls.target = this.pendulum.handleB.mesh.position;
   }
 

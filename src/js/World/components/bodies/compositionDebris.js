@@ -4,13 +4,15 @@ export const compositionDebris = (
   scene,
   loop,
   physicsWorld,
-  envMap
+  envMap,
+  colorComposition
 ) => {
   const debrisSmallBegin = bullets(
     scene,
     loop,
     physicsWorld,
     envMap,
+    colorComposition,
     {
       spreadWidth: 12,
       nRange: 40, nMin: 320,
@@ -29,6 +31,7 @@ export const compositionDebris = (
     loop,
     physicsWorld,
     envMap,
+    colorComposition,
     {
       spreadWidth: 12,
       nRange: 20, nMin: 80,
@@ -47,6 +50,7 @@ export const compositionDebris = (
     loop,
     physicsWorld,
     envMap,
+    colorComposition,
     {
       spreadWidth: 9,
       nRange: 4, nMin: 4,
@@ -65,6 +69,7 @@ export const compositionDebris = (
     loop,
     physicsWorld,
     envMap,
+    colorComposition,
     {
       spreadWidth: 12,
       nRange: 20, nMin: 120,

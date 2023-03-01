@@ -6,6 +6,7 @@ export const lines = (
   loop,
   physicsWorld,
   colorComposition,
+  colorBalance,
   props
 ) => {
   const {
@@ -22,8 +23,20 @@ export const lines = (
   ];
 
   for (let i = 0; i < n; i++) {
-    const randomSeed = fxrand();
-    const colorIndex = Math.round((colors.length - 1) * randomSeed);
+
+    const mSeed = fxrand();
+    let colorIndex = 0;
+    if (mSeed > colorBalance.cb1) {
+      const miSeed = fxrand();
+      if (miSeed < colorBalance.cb2) {
+        colorIndex = 1;
+      } else {
+        colorIndex = 2;
+      }
+    }
+
+    // const randomSeed = fxrand();
+    // const colorIndex = Math.round((colors.length - 1) * randomSeed);
 
     const size = {
       length: fxrand() * lengthRange + lengthMin

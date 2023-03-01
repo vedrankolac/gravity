@@ -10,12 +10,21 @@ export const compositionMain = (
   envMap,
   colorComposition
 ) => {
+
+  // const colorBalance = {
+  //   cb1: fxrand() * 0.3 + 0.3,
+  //   cb2: fxrand() * 0.3 + 0.3,
+  // }
+
+  const colorBalance = colorComposition.colorBalance;
+
   const spheresMid = spheres(
     scene,
     loop,
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       spreadWidth: 10,
       n: 16,
@@ -30,6 +39,7 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       spreadWidth: 18,
       n: 64,
@@ -44,6 +54,7 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       distanceMin: 8, distanceRange: 3,
       n: 260,
@@ -59,6 +70,7 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       distanceMin: 12, distanceRange: 8,
       n: 16,
@@ -74,6 +86,7 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       distanceMin: 7, distanceRange: 2,
       n: 16,
@@ -89,6 +102,7 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       distanceMin: 8, distanceRange: 4,
       n: 3,
@@ -104,11 +118,12 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       spreadWidth: 14,
       n: 4,
-      widthRange:  10,   widthMin: 2,
-      heightRange:  8,  heightMin: 1,
+      widthRange:  9,   widthMin: 3,
+      heightRange:  7,  heightMin: 2,
     }
   );
 
@@ -118,6 +133,7 @@ export const compositionMain = (
     physicsWorld,
     envMap,
     colorComposition,
+    colorBalance,
     {
       spreadWidth: 8,
       n: 6,
@@ -131,6 +147,7 @@ export const compositionMain = (
     loop,
     physicsWorld,
     colorComposition,
+    colorBalance,
     {
       spreadWidth: 14,
       n: 48,
@@ -144,6 +161,7 @@ export const compositionMain = (
     loop,
     physicsWorld,
     colorComposition,
+    colorBalance,
     {
       spreadWidth: 14,
       n: 32,

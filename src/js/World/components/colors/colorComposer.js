@@ -42,11 +42,11 @@ const colorComposer = () => {
   const getHueVariants = hue => {
     // 0.166 is equivalent to 60 degrees in the hue spectrum
     return [
-      hue + 0.166 / 2,
-      hue + 0.166,
-      hue + 0.166 * 1.2,
-      // hue + 0.166*2, // almost complement -- maybe to much for this env
-      // initHue + 0.166*3 // complement -- maybe to much for this env
+      // hue + 0.166 / 2,
+      // hue + 0.166,
+      // hue + 0.166 * 1.2,
+      hue + 0.166*2, // almost complement -- maybe to much for this env
+      hue + 0.166*3 // complement -- maybe to much for this env
     ]
   }
 
@@ -83,7 +83,11 @@ const colorComposer = () => {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
-      bg: c,
+      bg: randomized[0],
+      colorBalance: {
+        cb1: fxrand() * 0.3 + 0.3,
+        cb2: fxrand() * 0.3 + 0.3,
+      }
     };
   }
   paleteGenerators.push(whiteBlackColor);
@@ -123,6 +127,10 @@ const colorComposer = () => {
       b: randomized[1],
       c: randomized[2],
       bg: randomized[0],
+      colorBalance: {
+        cb1: fxrand() * 0.2 + 0.66,
+        cb2: fxrand() * 0.2 + 0.6,
+      }
     };
   }
   paleteGenerators.push(duoAndLightness);
@@ -217,6 +225,10 @@ const colorComposer = () => {
       b: randomized[1],
       c: randomized[2],
       bg: randomizedBg[0],
+      colorBalance: {
+        cb1: fxrand() * 0.3 + 0.3,
+        cb2: fxrand() * 0.3 + 0.3,
+      }
     };
   }
   paleteGenerators.push(grayscale);
@@ -228,25 +240,21 @@ const colorComposer = () => {
     // no color - 10%
     colorConfig = grayscale();
     paleteName = grayscale.name;
-  } else if ((colorCompositionID => 0.1) && (colorCompositionID < 0.35)) {
+  } else if ((colorCompositionID => 0.1) && (colorCompositionID < 0.80)) {
     // one color - 25%
     colorConfig = whiteBlackColor();
     paleteName = whiteBlackColor.name;
-  } else if ((colorCompositionID => 0.35) && (colorCompositionID < 0.75)) {
-    // two colors - 40%
-    colorConfig = duoAndLightness();
-    paleteName = duoAndLightness.name;
-  } else if ((colorCompositionID => 0.75) && (colorCompositionID < 1)) {
+  } else if ((colorCompositionID => 0.80) && (colorCompositionID < 1)) {
     // three colors - 25%
-    colorConfig = tripple();
-    paleteName = tripple.name;
+    colorConfig = duoAndLightness();
+  paleteName = duoAndLightness.name;
   }
 
-  // colorConfig = tripple();
-  // paleteName = tripple.name;
+  // colorConfig = grayscale();
+  // paleteName = grayscale.name;
 
-  colorConfig = whiteBlackColor();
-  paleteName = duoAndLightness.name;
+  // colorConfig = whiteBlackColor();
+  // paleteName = whiteBlackColor.name;
 
   // colorConfig = duoAndLightness();
   // paleteName = duoAndLightness.name;
