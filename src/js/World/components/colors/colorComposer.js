@@ -46,7 +46,7 @@ const colorComposer = () => {
       // hue + 0.166,
       // hue + 0.166 * 1.2,
       hue + 0.166*2, // almost complement -- maybe to much for this env
-      hue + 0.166*3 // complement -- maybe to much for this env
+      hue + 0.166*3.6 // more than complement -- maybe to much for this env
     ]
   }
 
@@ -256,8 +256,8 @@ const colorComposer = () => {
   // colorConfig = whiteBlackColor();
   // paleteName = whiteBlackColor.name;
 
-  // colorConfig = duoAndLightness();
-  // paleteName = duoAndLightness.name;
+  colorConfig = duoAndLightness();
+  paleteName = duoAndLightness.name;
 
   console.log('palette:  ', paleteName, colorCompositionID);
   return colorConfig;
