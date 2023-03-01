@@ -31,7 +31,7 @@ export const compositionMain = (
     envMap,
     colorComposition,
     {
-      spreadWidth: 16,
+      spreadWidth: 18,
       n: 64,
       sizeRange: 0.03,
       sizeMin: 0.01
@@ -45,8 +45,23 @@ export const compositionMain = (
     envMap,
     colorComposition,
     {
-      spreadWidth: 10,
-      n: 256,
+      distanceMin: 8, distanceRange: 3,
+      n: 260,
+      widthRange:  0.12,  widthMin: 0.02,
+      heightRange: 0.12, heightMin: 0.02,
+      depthRange:  1.6 ,  depthMin: 0.5,
+    }
+  );
+
+  const sticksDistant = cuboids(
+    scene,
+    loop,
+    physicsWorld,
+    envMap,
+    colorComposition,
+    {
+      distanceMin: 12, distanceRange: 8,
+      n: 16,
       widthRange:  0.12,  widthMin: 0.02,
       heightRange: 0.12, heightMin: 0.02,
       depthRange:  1.6 ,  depthMin: 0.5,
@@ -60,7 +75,7 @@ export const compositionMain = (
     envMap,
     colorComposition,
     {
-      spreadWidth: 9,
+      distanceMin: 7, distanceRange: 2,
       n: 16,
       widthRange:  0.4,   widthMin: 0.2,
       heightRange: 0.4,  heightMin: 0.2,
@@ -75,7 +90,7 @@ export const compositionMain = (
     envMap,
     colorComposition,
     {
-      spreadWidth: 12,
+      distanceMin: 8, distanceRange: 4,
       n: 3,
       widthRange:  0.8,   widthMin: 1.0,
       heightRange: 0.8,  heightMin: 1.0,

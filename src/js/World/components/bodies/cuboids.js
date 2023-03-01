@@ -13,7 +13,7 @@ const cuboids = (
 ) => {
 
   const {
-    spreadWidth,
+    distanceMin = 8, distanceRange = 2,
     n,
     widthRange,  widthMin,
     heightRange, heightMin,
@@ -24,21 +24,29 @@ const cuboids = (
   const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.55);
   const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.55);
 
+  const rndR = () => {
+    return fxrand() * 0.95;
+  }
+
+  const rndM = () => {
+    return fxrand() * 0.55;
+  }
+
   const material_1 = canvasTextureMaterial(
     {...maps_1, envMap},
-    {roughness: 0.25, metalness: 0},
+    {roughness: rndR(), metalness: rndM()},
     1
   );
 
   const material_2 = canvasTextureMaterial(
     {...maps_2, envMap},
-    {roughness: 0.25, metalness: 0},
+    {roughness: rndR(), metalness: rndM()},
     1
   );
 
   const material_3 = canvasTextureMaterial(
     {...maps_3, envMap},
-    {roughness: 0.25, metalness: 0},
+    {roughness: rndR(), metalness: rndM()},
     1
   );
 
@@ -55,10 +63,14 @@ const cuboids = (
       depth:  fxrand() *  depthRange  + depthMin
     }
 
+    const r = fxrand() * distanceMin + fxrand() * distanceRange;
+    const p = MathUtils.degToRad(fxrand() * 360);
+    const g = MathUtils.degToRad(fxrand() * 360);
+
     const translation = {
-      x: fxrand() * spreadWidth - spreadWidth/2,
-      y: fxrand() * spreadWidth - spreadWidth/2,
-      z: fxrand() * spreadWidth - spreadWidth/2
+      x: r * Math.sin(p) * Math.cos(g),
+      y: r * Math.sin(p) * Math.sin(g),
+      z: r * Math.cos(p),
     }
 
     const rotation = {
