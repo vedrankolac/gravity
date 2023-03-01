@@ -145,11 +145,15 @@ class Loop {
             ));
 
           // if (body.collider.intname === 'large-bullet') {
-          //   console.log('large-bullet', body.collider);
+          //   // console.log('large-bullet', body.collider);
           //   this.physicsWorld.contactsWith(body.collider, (otherCollider) => {
           //     console.log('+ ', otherCollider);
           //   });
           // }
+
+          // this.physicsWorld.contactsWith(body.collider, (otherCollider) => {
+          //   console.log('+ ', otherCollider);
+          // });
           
           // if (position.x < -20 && body.mesh.name === 'bullet') {
           //   this.physicsWorld.removeRigidBody(body.rigidBody);

@@ -51,9 +51,9 @@ export const compositionDebris = (
       spreadWidth: 9,
       nRange: 4, nMin: 4,
       xRange: 800, xMin: 2400,
-      widthRange:  0,  widthMin: 1.4,
-      heightRange: 0, heightMin: 0.6,
-      depthRange:  0,  depthMin: 0.4,
+      widthRange:  0.4,  widthMin: 0.8,
+      heightRange: 0.2, heightMin: 0.25,
+      depthRange:  0.2,  depthMin: 0.25,
       impulse: -220,
       isVisible: true,
       name: 'large-bullet'

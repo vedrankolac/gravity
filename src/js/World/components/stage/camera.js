@@ -2,11 +2,7 @@ import { PerspectiveCamera, Group, Vector3 } from 'three';
 import { MathUtils } from 'three';
 
 const createCamera = () => {
-  const camera = new PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.1, 300 );
-
-  // camera.position.x = 9;
-  // camera.position.y = 9;
-  // camera.position.z = 9;
+  const camera = new PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.1, 400 );
 
   // center distance
   const radius  = fxrand() * 6 + 22;

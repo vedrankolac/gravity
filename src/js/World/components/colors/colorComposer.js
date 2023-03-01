@@ -83,7 +83,7 @@ const colorComposer = () => {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
-      bg: randomized[0],
+      bg: c,
     };
   }
   paleteGenerators.push(whiteBlackColor);
