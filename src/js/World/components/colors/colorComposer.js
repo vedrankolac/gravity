@@ -256,8 +256,8 @@ const colorComposer = () => {
   // colorConfig = whiteBlackColor();
   // paleteName = whiteBlackColor.name;
 
-  colorConfig = duoAndLightness();
-  paleteName = duoAndLightness.name;
+  // colorConfig = duoAndLightness();
+  // paleteName = duoAndLightness.name;
 
   console.log('palette:  ', paleteName, colorCompositionID);
   return colorConfig;
