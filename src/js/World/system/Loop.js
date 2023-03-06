@@ -85,7 +85,8 @@ class Loop {
     // stop all the bodies and them run tick on them only once
     // bodies are stopped by setting zero force on all of them until they are placed so they are not overlapping in space
     // looks like doing this in 6 steps is enough to acchive this result
-    if (this.stopBodyCounter < this.bodies.length*10) {
+    // more than 6 stops might break determinism on Firefox
+    if (this.stopBodyCounter < this.bodies.length*6) {
       this.bodies.forEach(body => {
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
