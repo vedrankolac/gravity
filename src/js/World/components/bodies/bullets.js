@@ -19,12 +19,13 @@ export const bullets = (
     heightRange, heightMin,
     depthRange,  depthMin,
     impulse,
-    isVisible,
     name
   } = props;
 
   const bulletNum = Math.round(nRange * fxrand()) + nMin;
-  console.log('bulletNum:', bulletNum);
+  if (name === 'large-bullet') {
+    console.log('bulletNum:', bulletNum); 
+  }
 
   const rndR = () => {
     return fxrand() * 0.85;
@@ -76,7 +77,7 @@ export const bullets = (
       y: MathUtils.degToRad(fxrand() * 360),
       z: MathUtils.degToRad(fxrand() * 360),
     }
-    const cubeItem = bullet(material, size, translation, rotation, isVisible, name, physicsWorld);
+    const cubeItem = bullet(material, size, translation, rotation, name, physicsWorld);
 
     cubeItem.rigidBody.tick = (delta) => {
       // console.log('tick bullet');

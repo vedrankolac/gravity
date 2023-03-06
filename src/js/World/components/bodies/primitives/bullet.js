@@ -18,7 +18,6 @@ export const bullet = (
     size,
     translation,
     rotation,
-    isVisible,
     name,
     physicsWorld,
     widthSegments = 1,
@@ -51,8 +50,7 @@ export const bullet = (
   const mesh = new Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
-  // mesh.visible = isVisible;
-  mesh.name = 'bullet';
+  mesh.name = name;
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
 
   const rigidBodyDesc = RigidBodyDesc.dynamic().setCcdEnabled(true);
@@ -65,8 +63,6 @@ export const bullet = (
   const rigidBody = physicsWorld.createRigidBody(rigidBodyDesc);
   const collider = ColliderDesc.cuboid(size.width / 2, size.height / 2, size.depth / 2);
   // const collider = ColliderDesc.cuboid(size.width / 2, size.height / 2, size.depth / 2).setActiveEvents(ActiveEvents.COLLISION_EVENTS);
-  // collider.intname = name;
-  // collider.mesh = mesh;
 
   physicsWorld.createCollider(collider, rigidBody);
 
