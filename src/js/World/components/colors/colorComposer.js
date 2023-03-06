@@ -40,19 +40,11 @@ const colorComposer = () => {
   ]
 
   const getHueVariants = hue => {
-    // 0.166 is equivalent to 60 degrees in the hue spectrum
     return [
-      // hue + 0.166 / 2,
-      // hue + 0.166,
-      // hue + 0.166 * 1.2,
-      hue + 0.166*2, // almost complement -- maybe to much for this env
-      hue + 0.166*3.6 // more than complement -- maybe to much for this env
+      hue + fxrand() * 0.2 + 0.5,
+      hue + fxrand() * 0.2 + 0.5,
     ]
   }
-
-  // const grayscaleBright = () => fxrand() * 0.1 + 0.92;
-  // const grayscaleStrong = () => fxrand() * 0.3 + 0.1;
-  // const grayscaleDark   = () => fxrand() * 0.02;
 
   const grayscaleBright = () => fxrand() * 0.35 + 0.5;
   const grayscaleStrong = () => fxrand() * 0.3  + 0.2;
@@ -95,7 +87,7 @@ const colorComposer = () => {
   const duoAndLightness = () => {
     const themeSeed = fxrand();
     const themeIndex = Math.round((themes.length - 1) * themeSeed);
-    const theme = themes[themeIndex];
+    const theme = themes[0];
 
     const themeASeed = fxrand();
     const themeAIndex = Math.round((themes.length - 1) * themeASeed);
@@ -103,9 +95,9 @@ const colorComposer = () => {
 
     const themeBSeed = fxrand();
     const themeBIndex = Math.round((themes.length - 1) * themeBSeed);
-    const themeB = themes[themeBIndex];
+    const themeB = themes[2];
 
-    const initHue = fxrand();
+    const initHue = fxrand() * 0.14;
     const secondHueVariants = getHueVariants(initHue);
     const secondHueSeed = fxrand();
     const secondHueIndex = Math.round((secondHueVariants.length - 1) * secondHueSeed);
@@ -138,7 +130,7 @@ const colorComposer = () => {
   const tripple = () => {
     const themeASeed = fxrand();
     const themeAIndex = Math.round((themes.length - 1) * themeASeed);
-    const themeA = themes[themeAIndex];
+    const themeA = themes[0];
 
     const themeBSeed = fxrand();
     const themeBIndex = Math.round((themes.length - 1) * themeBSeed);
@@ -146,9 +138,9 @@ const colorComposer = () => {
 
     const themeCSeed = fxrand();
     const themeCIndex = Math.round((themes.length - 2) * themeCSeed);
-    const themeC = themes[themeCIndex];
+    const themeC = themes[2];
 
-    const initHue = fxrand();
+    const initHue = fxrand() * 0.14;
 
     const secondHueVariants = getHueVariants(initHue);
     const secondHueSeed = fxrand();
@@ -184,6 +176,10 @@ const colorComposer = () => {
       b: randomized[1],
       c: randomized[2],
       bg: randomizedBg[0],
+      colorBalance: {
+        cb1: fxrand() * 0.2 + 0.66,
+        cb2: fxrand() * 0.2 + 0.6,
+      }
     };
   }
   paleteGenerators.push(tripple);
@@ -191,7 +187,7 @@ const colorComposer = () => {
   const grayscale = () => {
     const themeASeed = fxrand();
     const themeAIndex = Math.round((grayscaleThemes.length - 1) * themeASeed);
-    const themeA = grayscaleThemes[themeAIndex];
+    const themeA = grayscaleThemes[0];
 
     const themeBSeed = fxrand();
     const themeBIndex = Math.round((grayscaleThemes.length - 1) * themeBSeed);
@@ -199,7 +195,7 @@ const colorComposer = () => {
 
     const themeCSeed = fxrand();
     const themeCIndex = Math.round((grayscaleThemes.length - 1) * themeCSeed);
-    const themeC = grayscaleThemes[themeCIndex];
+    const themeC = grayscaleThemes[2];
 
     const a = {
       color: hslToHex(0, 0, themeA),
@@ -226,8 +222,8 @@ const colorComposer = () => {
       c: randomized[2],
       bg: randomizedBg[0],
       colorBalance: {
-        cb1: fxrand() * 0.3 + 0.3,
-        cb2: fxrand() * 0.3 + 0.3,
+        cb1: fxrand() * 0.6 + 0.3,
+        cb2: fxrand() * 0.6 + 0.3,
       }
     };
   }
@@ -236,15 +232,15 @@ const colorComposer = () => {
   let colorConfig = null;
   let paleteName = null;
 
-  if (colorCompositionID < 0.1) {
+  if (colorCompositionID < 0.05) {
     // no color - 10%
     colorConfig = grayscale();
     paleteName = grayscale.name;
-  } else if ((colorCompositionID => 0.1) && (colorCompositionID < 0.80)) {
+  } else if ((colorCompositionID => 0.05) && (colorCompositionID < 0.90)) {
     // one color - 25%
     colorConfig = whiteBlackColor();
     paleteName = whiteBlackColor.name;
-  } else if ((colorCompositionID => 0.80) && (colorCompositionID < 1)) {
+  } else if ((colorCompositionID => 0.90) && (colorCompositionID < 1)) {
     // three colors - 25%
     colorConfig = duoAndLightness();
   paleteName = duoAndLightness.name;
@@ -258,6 +254,9 @@ const colorComposer = () => {
 
   // colorConfig = duoAndLightness();
   // paleteName = duoAndLightness.name;
+
+  // colorConfig = tripple();
+  // paleteName = tripple.name;
 
   console.log('palette:  ', paleteName, colorCompositionID);
   return colorConfig;
