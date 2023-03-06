@@ -120,10 +120,10 @@ export const compositionMain = (
     colorComposition,
     colorBalance,
     {
-      spreadWidth: 14,
+      spreadWidth: 12,
       n: 4,
-      widthRange:  9,   widthMin: 3,
-      heightRange:  7,  heightMin: 2,
+      widthRange:  9,   widthMin: 4,
+      heightRange: 9,  heightMin: 3,
     }
   );
 

@@ -51,7 +51,7 @@ export const compositionDebris = (
     colorComposition,
     {
       spreadWidth: 9,
-      nRange: 4, nMin: 4,
+      nRange: 6, nMin: 4,
       xRange: 800, xMin: 2400,
       widthRange:  0.6,  widthMin: 0.8,
       heightRange: 0.25, heightMin: 0.25,
