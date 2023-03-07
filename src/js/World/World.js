@@ -25,8 +25,6 @@ import { compositionMain } from './components/bodies/compositionMain';
 
 class World {
   constructor() {
-    console.log('fxhash:   ', fxhash);
-
     this.gravity = 0;
     this.dt = 1/120;
 
@@ -86,13 +84,15 @@ class World {
 
     this.dome = walls(this.scene, this.floorSize, this.bgColor);
 
-    window.$fxhashFeatures = {
-      'Background Color': this.colorComposition.bgName,
-      'Color Palette': this.colorComposition.name,
-      'Large Objects' : this.compDebris,
-    }
+    // const ff = {
+    //   'Background Color': this.colorComposition.bgName,
+    //   'Color Palette': this.colorComposition.name,
+    //   'Large Objects' : this.compDebris,
+    // }
+    // addFeatures(ff);
 
-    console.log('Features', window.$fxhashFeatures);
+    // console.log('ff', ff);
+    // fxpreview();
   }
 
   start() {

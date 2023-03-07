@@ -72,7 +72,7 @@ const colorComposer = () => {
 
     const randomized = shuffle([a,b,c]);
 
-    let cc = {
+    return {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
@@ -84,8 +84,6 @@ const colorComposer = () => {
       name: 'One Color',
       bgName: ''
     }
-
-    return cc;
   }
   paleteGenerators.push(whiteBlackColor);
 
@@ -120,7 +118,7 @@ const colorComposer = () => {
 
     const randomized = shuffle([a,b,c]);
 
-    let cc = {
+    return {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
@@ -132,8 +130,6 @@ const colorComposer = () => {
       name: 'Two Colors',
       bgName: ''
     }
-
-    return cc;
   }
   paleteGenerators.push(duoAndLightness);
 
@@ -226,7 +222,7 @@ const colorComposer = () => {
     const bg2 = white;
     const randomizedBg = shuffle([a,b,c,bg1,bg2]);
 
-    let cc = {
+    return {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
@@ -238,8 +234,6 @@ const colorComposer = () => {
       name: 'Grayscale',
       bgName: ''
     }
-
-    return cc;
   }
   paleteGenerators.push(grayscale);
 
@@ -272,18 +266,18 @@ const colorComposer = () => {
   // colorConfig = tripple();
   // paleteName = tripple.name;
 
-  let hsl = {};
-  colorConfig.bg.color.getHSL(hsl);
+  // let hsl = {};
+  // colorConfig.bg.color.getHSL(hsl);
 
-  if (hsl.s === 0 && hsl.l === 0.04) {
-    colorConfig.bgName = 'Black';
-  } else if (hsl.s === 0 && hsl.l === 0.85) {
-    colorConfig.bgName = 'White';
-  } else if (hsl.s === 0 && (hsl.l > 0.04 && hsl.l < 0.85)) {
-    colorConfig.bgName = 'Gray';
-  } else {
-    colorConfig.bgName = 'Color';
-  }
+  // if (hsl.s === 0 && hsl.l === 0.04) {
+  //   colorConfig.bgName = 'Black';
+  // } else if (hsl.s === 0 && hsl.l === 0.85) {
+  //   colorConfig.bgName = 'White';
+  // } else if (hsl.s === 0 && (hsl.l > 0.04 && hsl.l < 0.85)) {
+  //   colorConfig.bgName = 'Gray';
+  // } else {
+  //   colorConfig.bgName = 'Color';
+  // }
 
   // console.log('palette:  ', paleteName, colorCompositionID);
   return colorConfig;
