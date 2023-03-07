@@ -84,15 +84,17 @@ class World {
 
     this.dome = walls(this.scene, this.floorSize, this.bgColor);
 
-    // const ff = {
-    //   'Background Color': this.colorComposition.bgName,
-    //   'Color Palette': this.colorComposition.name,
-    //   'Large Objects' : this.compDebris,
-    // }
-    // addFeatures(ff);
+    this.ff = {
+      'Background Color': this.colorComposition.bgName,
+      'Color Palette': this.colorComposition.name,
+      'Large Objects' : this.compDebris,
+    }
+    console.log('ff', this.ff);
 
-    // console.log('ff', ff);
+    // addFeatures(ff);
     // fxpreview();
+
+    this.start();
   }
 
   start() {
