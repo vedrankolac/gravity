@@ -44,7 +44,7 @@ class World {
     this.camera   = createCamera();
     this.lights   = createLights(this.scene);
 
-    this.stats = stats();
+    this.stats = stats(true);
     this.orbitControls = orbitControls(this.camera, this.renderer.domElement);
     this.composer = this.doPostprocessing ? postprocessing(this.camera, this.scene, this.renderer) : null;
     this.loop = new Loop(this.camera, this.scene, this.renderer, this.composer, this.stats, this.orbitControls, this.doPostprocessing, this.gravity, this.dt);

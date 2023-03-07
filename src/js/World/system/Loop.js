@@ -31,7 +31,10 @@ class Loop {
     this.renderer.setAnimationLoop(() => {
       if (this.runPhysics) this.tick(); // update physics engine
 
-      this.stats.update();
+      if ( this.stats !== undefined) {
+        this.stats.update(); 
+      }
+
       this.orbitControls.update();
 
       if (this.doPostprocessing) {
