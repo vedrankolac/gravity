@@ -1,4 +1,4 @@
-export const setPrintTools = (renderer, scene, camera) => {
+export const setPrintTools = (renderer, composer, postprocessingEnabled, scene, camera) => {
   const saveOnPKeyPress = (e) => {
     if (e.code === 'KeyP') {
       saveAsPng();
@@ -7,7 +7,13 @@ export const setPrintTools = (renderer, scene, camera) => {
 
   const saveAsPng = () => {
     console.log('downloading...');
-    renderer.render(scene, camera);
+
+    if (postprocessingEnabled) {
+      composer.render();
+    } else {
+      renderer.render(scene, camera);
+    }
+
     const imgData = renderer.domElement.toDataURL();
     var img = new Image();
     img.src = imgData;
