@@ -246,22 +246,22 @@ const colorComposer = () => {
   let colorConfig = null;
   let paleteName = null;
 
-  // if (colorCompositionID < 0.05) {
-  //   // no color - 10%
-  //   colorConfig = grayscale();
-  //   paleteName = grayscale.name;
-  // } else if ((colorCompositionID => 0.05) && (colorCompositionID < 0.90)) {
-  //   // one color - 25%
-  //   colorConfig = whiteBlackColor();
-  //   paleteName = whiteBlackColor.name;
-  // } else if ((colorCompositionID => 0.90) && (colorCompositionID < 1)) {
-  //   // three colors - 25%
-  //   colorConfig = duoAndLightness();
-  // paleteName = duoAndLightness.name;
-  // }
+  if (colorCompositionID < 0.05) {
+    // no color - 10%
+    colorConfig = grayscale();
+    paleteName = grayscale.name;
+  } else if ((colorCompositionID => 0.05) && (colorCompositionID < 0.90)) {
+    // one color - 25%
+    colorConfig = whiteBlackColor();
+    paleteName = whiteBlackColor.name;
+  } else if ((colorCompositionID => 0.90) && (colorCompositionID < 1)) {
+    // three colors - 25%
+    colorConfig = duoAndLightness();
+  paleteName = duoAndLightness.name;
+  }
 
-  colorConfig = grayscale();
-  paleteName = grayscale.name;
+  // colorConfig = grayscale();
+  // paleteName = grayscale.name;
 
   // colorConfig = whiteBlackColor();
   // paleteName = whiteBlackColor.name;
