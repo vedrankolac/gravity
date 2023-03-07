@@ -1,6 +1,6 @@
 import { hslToHex } from "../../utils/colorUtils";
 import { shuffle } from "../../utils/arrayFxRnd"
-
+import { Color } from "three";
 
 const colorComposer = () => {
   const colorCompositionID = fxrand();
@@ -71,7 +71,8 @@ const colorComposer = () => {
     };
 
     const randomized = shuffle([a,b,c]);
-    return {
+
+    let cc = {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
@@ -79,8 +80,12 @@ const colorComposer = () => {
       colorBalance: {
         cb1: fxrand() * 0.3 + 0.3,
         cb2: fxrand() * 0.3 + 0.3,
-      }
-    };
+      },
+      name: 'One Color',
+      bgName: ''
+    }
+
+    return cc;
   }
   paleteGenerators.push(whiteBlackColor);
 
@@ -114,7 +119,8 @@ const colorComposer = () => {
     };
 
     const randomized = shuffle([a,b,c]);
-    return {
+
+    let cc = {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
@@ -122,8 +128,12 @@ const colorComposer = () => {
       colorBalance: {
         cb1: fxrand() * 0.2 + 0.66,
         cb2: fxrand() * 0.2 + 0.6,
-      }
-    };
+      },
+      name: 'Two Colors',
+      bgName: ''
+    }
+
+    return cc;
   }
   paleteGenerators.push(duoAndLightness);
 
@@ -216,7 +226,7 @@ const colorComposer = () => {
     const bg2 = white;
     const randomizedBg = shuffle([a,b,c,bg1,bg2]);
 
-    return {
+    let cc = {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
@@ -224,30 +234,34 @@ const colorComposer = () => {
       colorBalance: {
         cb1: fxrand() * 0.6 + 0.3,
         cb2: fxrand() * 0.6 + 0.3,
-      }
-    };
+      },
+      name: 'Grayscale',
+      bgName: ''
+    }
+
+    return cc;
   }
   paleteGenerators.push(grayscale);
 
   let colorConfig = null;
   let paleteName = null;
 
-  if (colorCompositionID < 0.05) {
-    // no color - 10%
-    colorConfig = grayscale();
-    paleteName = grayscale.name;
-  } else if ((colorCompositionID => 0.05) && (colorCompositionID < 0.90)) {
-    // one color - 25%
-    colorConfig = whiteBlackColor();
-    paleteName = whiteBlackColor.name;
-  } else if ((colorCompositionID => 0.90) && (colorCompositionID < 1)) {
-    // three colors - 25%
-    colorConfig = duoAndLightness();
-  paleteName = duoAndLightness.name;
-  }
+  // if (colorCompositionID < 0.05) {
+  //   // no color - 10%
+  //   colorConfig = grayscale();
+  //   paleteName = grayscale.name;
+  // } else if ((colorCompositionID => 0.05) && (colorCompositionID < 0.90)) {
+  //   // one color - 25%
+  //   colorConfig = whiteBlackColor();
+  //   paleteName = whiteBlackColor.name;
+  // } else if ((colorCompositionID => 0.90) && (colorCompositionID < 1)) {
+  //   // three colors - 25%
+  //   colorConfig = duoAndLightness();
+  // paleteName = duoAndLightness.name;
+  // }
 
-  // colorConfig = grayscale();
-  // paleteName = grayscale.name;
+  colorConfig = grayscale();
+  paleteName = grayscale.name;
 
   // colorConfig = whiteBlackColor();
   // paleteName = whiteBlackColor.name;
@@ -258,7 +272,20 @@ const colorComposer = () => {
   // colorConfig = tripple();
   // paleteName = tripple.name;
 
-  console.log('palette:  ', paleteName, colorCompositionID);
+  let hsl = {};
+  colorConfig.bg.color.getHSL(hsl);
+
+  if (hsl.s === 0 && hsl.l === 0.04) {
+    colorConfig.bgName = 'Black';
+  } else if (hsl.s === 0 && hsl.l === 0.85) {
+    colorConfig.bgName = 'White';
+  } else if (hsl.s === 0 && (hsl.l > 0.04 && hsl.l < 0.85)) {
+    colorConfig.bgName = 'Gray';
+  } else {
+    colorConfig.bgName = 'Color';
+  }
+
+  // console.log('palette:  ', paleteName, colorCompositionID);
   return colorConfig;
 }
 

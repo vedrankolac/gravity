@@ -23,9 +23,9 @@ export const bullets = (
   } = props;
 
   const bulletNum = Math.round(nRange * fxrand()) + nMin;
-  if (name === 'large-bullet') {
-    console.log('bulletNum:', bulletNum); 
-  }
+  // if (name === 'large-bullet') {
+  //   console.log('bulletNum:', bulletNum); 
+  // }
 
   const rndR = () => {
     return fxrand() * 0.85;
@@ -98,4 +98,6 @@ export const bullets = (
     scene.add(cubeItem.mesh);
     loop.bodies.push(cubeItem);
   }
+
+  return bulletNum;
 }

@@ -85,6 +85,14 @@ class World {
     this.compDebris = compositionDebris(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
 
     this.dome = walls(this.scene, this.floorSize, this.bgColor);
+
+    window.$fxhashFeatures = {
+      'Background Color': this.colorComposition.bgName,
+      'Color Palette': this.colorComposition.name,
+      'Large Objects' : this.compDebris,
+    }
+
+    console.log('Features', window.$fxhashFeatures);
   }
 
   start() {
