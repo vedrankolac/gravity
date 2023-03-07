@@ -10,7 +10,6 @@ import { createCamera, createDolly } from './components/stage/camera.js'
 import { createLights } from './components/stage/lights.js'
 import { VrControls } from './system/VrControls.js'
 import { createHandsPhysicsController } from "./system/handsPhysicsController.js"
-import { room as roomPhysicsComposition } from './components/bodies/room.js'
 import { walls } from './components/meshes/walls.js'
 import { colorComposer } from './components/colors/colorComposer.js'
 import { RoomEnvironment } from './components/stage/RoomEnv'
@@ -32,33 +31,32 @@ class World {
     this.dt = 1/120;
 
     this.xrEnabled = false;
-    this.doPostprocessing = true;
+    this.postprocessingEnabled = true;
+    this.printToolsEnabled = true;
 
     this.colorComposition = colorComposer();
     this.bgColor = this.colorComposition.bg.color;
-    this.bgHSL = {};
-    this.bgColor.getHSL(this.bgHSL);
 
-    this.renderer = createRenderer(this.doPostprocessing, this.xrEnabled);
+    this.renderer = createRenderer(this.postprocessingEnabled, this.xrEnabled);
     this.scene    = createScene();
     this.camera   = createCamera();
     this.lights   = createLights(this.scene);
 
     this.stats = stats(true);
     this.orbitControls = orbitControls(this.camera, this.renderer.domElement);
-    this.composer = this.doPostprocessing ? postprocessing(this.camera, this.scene, this.renderer) : null;
-    this.loop = new Loop(this.camera, this.scene, this.renderer, this.composer, this.stats, this.orbitControls, this.doPostprocessing, this.gravity, this.dt);
+    this.composer = this.postprocessingEnabled ? postprocessing(this.camera, this.scene, this.renderer) : null;
+    this.loop = new Loop(this.camera, this.scene, this.renderer, this.composer, this.stats, this.orbitControls, this.postprocessingEnabled, this.gravity, this.dt);
 
     this.dolly = createDolly(this.camera, this.scene);
     this.vrControls = this.xrEnabled ? new VrControls(this.renderer, this.dolly, this.camera) : null;
     this.xrEnabled ? this.loop.updatableBodies.push(this.vrControls) : null;
 
     this.floorSize = 300;
-    this.printTools = setPrintTools(this.renderer, this.scene, this.camera);
+    this.printTools = this.printToolsEnabled ? setPrintTools(this.renderer, this.scene, this.camera) : null;
 
     this.resizer = new Resizer(this.camera, this.renderer);
     this.resizer.onResize = () => {
-      this.composer = this.doPostprocessing ? postprocessing(this.camera, this.scene, this.renderer) : null;
+      this.composer = this.postprocessingEnabled ? postprocessing(this.camera, this.scene, this.renderer) : null;
       this.loop.updateComposer(this.composer);
     };
     
@@ -72,9 +70,7 @@ class World {
     const engineGravity = new Vector3(0.0, -this.gravity, 0.0);
     this.physicsWorld = new RWorld(engineGravity);
     this.physicsWorld.timestep = this.dt;
-    // this.physicsWorld.integrationParameters.maxCcdSubsteps = 1.2;
     this.loop.setPhysics(this.physicsWorld);
-    this.room = roomPhysicsComposition(this.physicsWorld, this.floorSize, false);
     this.handsPhysicsController = this.xrEnabled ? createHandsPhysicsController(this.scene, this.loop, this.physicsWorld, this.vrControls) : null;
   }
 
@@ -88,8 +84,7 @@ class World {
     this.compMain = compositionMain(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
     this.compDebris = compositionDebris(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
 
-    this.walls = walls(this.scene, this.floorSize, this.bgColor);
-    // this.orbitControls.target = this.pendulum.handleB.mesh.position;
+    this.dome = walls(this.scene, this.floorSize, this.bgColor);
   }
 
   start() {
