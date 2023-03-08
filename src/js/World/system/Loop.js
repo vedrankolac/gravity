@@ -19,7 +19,7 @@ class Loop {
     this.gravity = gravity;
     this.dt = dt;
     this.accumulator = 0;
-    this.stopBodyCounter = 0;
+    this.stepCounter = 0;
     this.allBodiesStopped = false;
     this.collideTimer = 0;
     document.addEventListener('keypress', this.togglePhysicsEngine);
@@ -111,13 +111,13 @@ class Loop {
     // bodies are stopped by setting zero force on all of them until they are placed so they are not overlapping in space
     // looks like doing this in 6 steps is enough to acchive this result
     // more than 6 stops might break determinism on Firefox
-    if (this.stopBodyCounter < this.bodies.length*6) {
+
+    if (this.stepCounter < 20) {
       this.bodies.forEach(body => {
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
         body.rigidBody.setLinvel({x: 0, y: 0, z: 0}, true);
         body.rigidBody.setAngvel({x: 0, y: 0, z: 0}, true);
-        ++ this.stopBodyCounter;
         // console.log('stop body', this.bodies.length);
       });
     } else if (!this.allBodiesStopped){
@@ -127,12 +127,17 @@ class Loop {
         }
       });
       this.allBodiesStopped = true;
-
-      this.prepareForCapture();
-      this.saveAsPng();
-      // fxpreview();
-      // location.reload();
     };
+
+    if (this.stepCounter === 180) {
+      // this.prepareForCapture();
+      // this.saveAsPng();
+      fxpreview();
+      // location.reload();
+      ++ this.stepCounter;
+    } else if (this.stepCounter < 180) {
+      ++ this.stepCounter;
+    }
   }
 
   tick() {
