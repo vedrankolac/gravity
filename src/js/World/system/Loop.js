@@ -79,6 +79,28 @@ class Loop {
     this.composer = composer;
   }
 
+  prepareForCapture = () => {
+    if (this.doPostprocessing) {
+      this.composer.render();
+    } else {
+      this.renderer.render(this.scene, this.camera);
+    }
+  }
+
+  saveAsPng = () => {
+    console.log('downloading...');
+
+    const imgData = this.renderer.domElement.toDataURL();
+    var img = new Image();
+    img.src = imgData;
+
+    const link = document.createElement('a');
+    link.download = 'download.png';
+    link.href = imgData;
+    link.click();
+    link.delete;
+  }
+
   updatePhysicsObjects = () => {
     // update updatables if there are some
     // for (const object of this.updatableBodies) {
@@ -105,6 +127,11 @@ class Loop {
         }
       });
       this.allBodiesStopped = true;
+
+      this.prepareForCapture();
+      this.saveAsPng();
+      // fxpreview();
+      // location.reload();
     };
   }
 
