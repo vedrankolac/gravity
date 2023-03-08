@@ -5,8 +5,12 @@ export const compositionDebris = (
   loop,
   physicsWorld,
   envMap,
-  colorComposition
+  colorComposition,
+  largeObjectsNum,
+  largeObjectsVel
 ) => {
+  const velocity = largeObjectsVel.value;
+
   const debrisSmallBegin = bullets(
     scene,
     loop,
@@ -20,7 +24,7 @@ export const compositionDebris = (
       widthRange:  0.04,  widthMin: 0.02,
       heightRange: 0.04, heightMin: 0.02,
       depthRange:  0.04,  depthMin: 0.02,
-      impulse: -220,
+      velocity,
       name: ''
     }
   );
@@ -38,7 +42,7 @@ export const compositionDebris = (
       widthRange:  0.1,  widthMin: 0.02,
       heightRange: 0.1, heightMin: 0.02,
       depthRange:  0.1,  depthMin: 0.02,
-      impulse: -220,
+      velocity,
       name: ''
     }
   );
@@ -51,12 +55,12 @@ export const compositionDebris = (
     colorComposition,
     {
       spreadWidth: 9,
-      nRange: 6, nMin: 4,
+      nRange: 0, nMin: largeObjectsNum,
       xRange: 800, xMin: 2400,
       widthRange:  0.6,  widthMin: 0.8,
       heightRange: 0.25, heightMin: 0.25,
       depthRange:  0.25,  depthMin: 0.25,
-      impulse: -220,
+      velocity,
       name: 'large-bullet'
     }
   );
@@ -74,10 +78,8 @@ export const compositionDebris = (
       widthRange:  0.04,  widthMin: 0.02,
       heightRange: 0.04, heightMin: 0.02,
       depthRange:  0.04,  depthMin: 0.02,
-      impulse: -220,
+      velocity,
       name: ''
     }
   );
-
-  return debrisLarge;
 }

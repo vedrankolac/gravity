@@ -18,6 +18,7 @@ import { ssao as postprocessing } from './components/effects/ssao'
 import { materialTester } from './utils/materialTester'
 import { lightTester } from './utils/lightTester'
 import { Resizer } from './system/Resizer'
+import { largeObjectsVel } from './components/bodies/largeObjectsVel'
 
 import { compositionDebris } from './components/bodies/compositionDebris';
 import { compositionMain } from './components/bodies/compositionMain';
@@ -40,7 +41,7 @@ class World {
     this.camera   = createCamera();
     this.lights   = createLights(this.scene);
 
-    this.stats = stats(true);
+    this.stats = stats(false);
     this.orbitControls = orbitControls(this.camera, this.renderer.domElement);
     this.composer = this.postprocessingEnabled ? postprocessing(this.camera, this.scene, this.renderer) : null;
     this.loop = new Loop(this.camera, this.scene, this.renderer, this.composer, this.stats, this.orbitControls, this.postprocessingEnabled, this.gravity, this.dt);
@@ -57,6 +58,17 @@ class World {
       this.composer = this.postprocessingEnabled ? postprocessing(this.camera, this.scene, this.renderer) : null;
       this.loop.updateComposer(this.composer);
     };
+
+    this.largeObjectsNum = Math.round(6 * fxrand()) + 4;
+    this.largeObjectsVel = largeObjectsVel(fxrand());
+
+    window.$fxhashFeatures = {
+      'Background Color': this.colorComposition.bg.name,
+      'Color Palette': this.colorComposition.name,
+      'Large Impact Objects' : this.largeObjectsNum,
+      'Impact Velocity' : this.largeObjectsVel.name,
+    };
+    // console.log('window.$fxhashFeatures', window.$fxhashFeatures);
     
     RAPIER.init().then(() => {
       this.physicsConfig();
@@ -80,20 +92,11 @@ class World {
     // this.lightTester         = lightTester(this.scene, envMap);
 
     this.compMain = compositionMain(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
-    this.compDebris = compositionDebris(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition);
+    this.compDebris = compositionDebris(this.scene, this.loop, this.physicsWorld, envMap, this.colorComposition, this.largeObjectsNum, this.largeObjectsVel);
 
     this.dome = walls(this.scene, this.floorSize, this.bgColor);
 
-    this.ff = {
-      'Background Color': this.colorComposition.bgName,
-      'Color Palette': this.colorComposition.name,
-      'Large Objects' : this.compDebris,
-    }
-    console.log('ff', this.ff);
-
-    // addFeatures(ff);
     // fxpreview();
-
     this.start();
   }
 

@@ -10,11 +10,13 @@ const colorComposer = () => {
 
   const black = {
     color: hslToHex(0, 0, 0.04),
-    envMapIntensity: envMapIntensity - 0.1
+    envMapIntensity: envMapIntensity - 0.1,
+    name: 'Black'
   };
   const white = {
     color: hslToHex(0, 0, 0.85),
-    envMapIntensity: envMapIntensity - 0.1
+    envMapIntensity: envMapIntensity - 0.1,
+    name: 'White'
   };
 
   const paleteGenerators = [];
@@ -67,8 +69,20 @@ const colorComposer = () => {
     const b = white;
     const c = {
       color: hslToHex(fxrand(), ...theme),
-      envMapIntensity
+      envMapIntensity,
+      name: 'Color'
     };
+
+    const bgSeed = fxrand();
+    let bg;
+
+    if (bgSeed < 0.6) {
+      bg = c;
+    } else if (bgSeed >= 0.6 && bgSeed < 0.88) {
+      bg = b;
+    } else if (bgSeed >= 0.88 && bgSeed < 1.0) {
+      bg = a;
+    }
 
     const randomized = shuffle([a,b,c]);
 
@@ -76,13 +90,12 @@ const colorComposer = () => {
       a: randomized[0],
       b: randomized[1],
       c: randomized[2],
-      bg: randomized[0],
+      bg,
       colorBalance: {
         cb1: fxrand() * 0.3 + 0.3,
         cb2: fxrand() * 0.3 + 0.3,
       },
-      name: 'One Color',
-      bgName: ''
+      name: 'Color, Black & White'
     }
   }
   paleteGenerators.push(whiteBlackColor);
@@ -109,14 +122,34 @@ const colorComposer = () => {
     const a = Math.round(fxrand()) ? white : black;
     const b = {
       color: hslToHex(initHue, ...themeA),
-      envMapIntensity
+      envMapIntensity,
+      name: 'Color'
     };
     const c = {
       color: hslToHex(secondHue, ...themeB),
-      envMapIntensity
+      envMapIntensity,
+      name: 'Color'
     };
 
+    const bgSeed = fxrand();
+    let bg;
+
+    if (bgSeed < 0.5) {
+      bg = b;
+    } else if (bgSeed >= 0.5 && bgSeed < 0.8) {
+      bg = c;
+    } else if (bgSeed >= 0.8 && bgSeed < 1.0) {
+      bg = a;
+    }
+
     const randomized = shuffle([a,b,c]);
+
+    let ccName;
+    if (a.name === 'Black') {
+      ccName = 'Two Colors & Black';
+    } else  if (a.name === 'White') {
+      ccName = 'Two Colors & White';
+    };
 
     return {
       a: randomized[0],
@@ -127,8 +160,7 @@ const colorComposer = () => {
         cb1: fxrand() * 0.2 + 0.66,
         cb2: fxrand() * 0.2 + 0.6,
       },
-      name: 'Two Colors',
-      bgName: ''
+      name: ccName
     }
   }
   paleteGenerators.push(duoAndLightness);
@@ -205,15 +237,18 @@ const colorComposer = () => {
 
     const a = {
       color: hslToHex(0, 0, themeA),
-      envMapIntensity
+      envMapIntensity,
+      name: 'Gray'
     };
     const b = {
       color: hslToHex(0, 0, themeB),
-      envMapIntensity
+      envMapIntensity,
+      name: 'Gray'
     };
     const c = {
       color: hslToHex(0, 0, themeC),
-      envMapIntensity
+      envMapIntensity,
+      name: 'Gray'
     };
 
     const randomized = shuffle([a,b,c]);
@@ -231,8 +266,7 @@ const colorComposer = () => {
         cb1: fxrand() * 0.6 + 0.3,
         cb2: fxrand() * 0.6 + 0.3,
       },
-      name: 'Grayscale',
-      bgName: ''
+      name: 'Grayscale'
     }
   }
   paleteGenerators.push(grayscale);
@@ -244,11 +278,11 @@ const colorComposer = () => {
     // no color - 10%
     colorConfig = grayscale();
     paleteName = grayscale.name;
-  } else if ((colorCompositionID => 0.05) && (colorCompositionID < 0.90)) {
+  } else if ((colorCompositionID >= 0.05) && (colorCompositionID < 0.90)) {
     // one color - 25%
     colorConfig = whiteBlackColor();
     paleteName = whiteBlackColor.name;
-  } else if ((colorCompositionID => 0.90) && (colorCompositionID < 1)) {
+  } else if ((colorCompositionID >= 0.90) && (colorCompositionID <= 1)) {
     // three colors - 25%
     colorConfig = duoAndLightness();
   paleteName = duoAndLightness.name;

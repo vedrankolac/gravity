@@ -18,7 +18,7 @@ export const bullets = (
     widthRange,  widthMin,
     heightRange, heightMin,
     depthRange,  depthMin,
-    impulse,
+    velocity,
     name
   } = props;
 
@@ -89,7 +89,7 @@ export const bullets = (
       // }, true);
 
       cubeItem.rigidBody.setLinvel({
-        x: impulse,
+        x: velocity,
         y: 0,
         z: 0
       }, true);
@@ -98,6 +98,4 @@ export const bullets = (
     scene.add(cubeItem.mesh);
     loop.bodies.push(cubeItem);
   }
-
-  return bulletNum;
 }
