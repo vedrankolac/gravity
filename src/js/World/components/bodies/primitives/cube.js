@@ -44,6 +44,7 @@ const cube = (
   mesh.castShadow = true;
   mesh.receiveShadow = true;
   shiftHandleUVs(conf, mesh.geometry.attributes.uv);
+  mesh.visible = false;
 
   const rigidBodyDesc = RigidBodyDesc.dynamic();
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);

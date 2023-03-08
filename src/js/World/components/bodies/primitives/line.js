@@ -31,6 +31,7 @@ export const line = (
   const mesh = new Line(geometry, material);
   mesh.castShadow = true;
   mesh.receiveShadow = true;
+  mesh.visible = false;
 
   const rigidBodyDesc = RigidBodyDesc.dynamic();
   rigidBodyDesc.setTranslation(translation.x, translation.y, translation.z);

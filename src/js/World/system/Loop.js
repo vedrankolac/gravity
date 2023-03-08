@@ -125,6 +125,7 @@ class Loop {
         if (body.rigidBody.tick != undefined) {
           body.rigidBody.tick();
         }
+        body.mesh.visible = true;
       });
       this.allBodiesStopped = true;
     };
