@@ -131,6 +131,7 @@ class Loop {
 
       const preloader = document.getElementById("preloader");
       preloader.style.display = "none";
+      preloader?.remove();
     };
 
     if (this.stepCounter === 180) {
