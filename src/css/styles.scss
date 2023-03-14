@@ -8,4 +8,16 @@ body {
     font-weight: 100;
     margin: 20px;
   }
+
+  .preloader {
+    position: absolute;
+
+    p {
+      font-family: monospace;
+      font-size: 14px;
+      margin: 0px;
+      padding: 12px 15px;
+      color: #cccccc;
+    }
+  }
 }

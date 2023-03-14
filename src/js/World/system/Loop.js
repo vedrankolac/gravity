@@ -114,13 +114,16 @@ class Loop {
 
     if (this.stepCounter < 20) {
       this.bodies.forEach(body => {
+        const preloaderText = document.getElementById("preloader-text");
+        preloaderText.textContent="preparing scene...";
+        
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
         body.rigidBody.setLinvel({x: 0, y: 0, z: 0}, true);
         body.rigidBody.setAngvel({x: 0, y: 0, z: 0}, true);
         // console.log('stop body', this.bodies.length);
       });
-    } else if (!this.allBodiesStopped){
+    } else if (!this.allBodiesStopped) {
       this.bodies.forEach(body => {
         if (body.rigidBody.tick != undefined) {
           body.rigidBody.tick();
@@ -128,6 +131,9 @@ class Loop {
         body.mesh.visible = true;
       });
       this.allBodiesStopped = true;
+
+      const preloader = document.getElementById("preloader");
+      preloader.style.display = "none";
     };
 
     if (this.stepCounter === 180) {
