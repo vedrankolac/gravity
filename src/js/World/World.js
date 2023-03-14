@@ -101,6 +101,8 @@ class World {
   }
 
   start() {
+    const preloaderText = document.getElementById("preloader-text");
+    preloaderText.innerText="••";
     this.loop.start();
   }
 

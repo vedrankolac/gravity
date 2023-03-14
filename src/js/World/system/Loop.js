@@ -114,9 +114,6 @@ class Loop {
 
     if (this.stepCounter < 20) {
       this.bodies.forEach(body => {
-        const preloaderText = document.getElementById("preloader-text");
-        preloaderText.textContent="preparing scene...";
-        
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
         body.rigidBody.setLinvel({x: 0, y: 0, z: 0}, true);
