@@ -2,6 +2,7 @@ import { cuboids } from './cuboids';
 import { spheres } from './spheres';
 import { planes } from './planes';
 import { lines } from './lines';
+import { RndNoiseTresholdNormal } from '../canvasMaps/RndNoiseMaps';
 
 export const compositionMain = (
   scene,
@@ -11,12 +12,12 @@ export const compositionMain = (
   colorComposition
 ) => {
 
-  // const colorBalance = {
-  //   cb1: fxrand() * 0.3 + 0.3,
-  //   cb2: fxrand() * 0.3 + 0.3,
-  // }
-
   const colorBalance = colorComposition.colorBalance;
+
+  const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.55);
+  const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.55);
+  const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.55);
+  const maps = [maps_1, maps_2, maps_3];
 
   const spheresMid = spheres(
     scene,
@@ -53,8 +54,8 @@ export const compositionMain = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
     colorBalance,
+    maps,
     {
       distanceMin: 8, distanceRange: 3,
       n: 260,
@@ -69,8 +70,8 @@ export const compositionMain = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
     colorBalance,
+    maps,
     {
       distanceMin: 12, distanceRange: 8,
       n: 16,
@@ -85,8 +86,8 @@ export const compositionMain = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
     colorBalance,
+    maps,
     {
       distanceMin: 7, distanceRange: 2,
       n: 16,
@@ -101,8 +102,8 @@ export const compositionMain = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
     colorBalance,
+    maps,
     {
       distanceMin: 8, distanceRange: 4,
       n: 3,

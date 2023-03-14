@@ -1,15 +1,14 @@
 import { cube } from "./primitives/cube";
 import { MathUtils } from 'three';
 import { canvasTextureMaterial } from "../materials/canvasTextureMaterial";
-import { RndNoiseTresholdNormal } from "../canvasMaps/RndNoiseMaps";
 
 const cuboids = (
   scene,
   loop,
   physicsWorld,
   envMap,
-  colorComposition,
   colorBalance,
+  maps,
   props
 ) => {
 
@@ -21,10 +20,6 @@ const cuboids = (
     depthRange,  depthMin,
   } = props;
 
-  const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.55);
-  const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.55);
-  const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.55);
-
   const rndR = () => {
     return fxrand() * 0.95;
   }
@@ -34,19 +29,19 @@ const cuboids = (
   }
 
   const material_1 = canvasTextureMaterial(
-    {...maps_1, envMap},
+    {...maps[0], envMap},
     {roughness: rndR(), metalness: rndM()},
     1
   );
 
   const material_2 = canvasTextureMaterial(
-    {...maps_2, envMap},
+    {...maps[1], envMap},
     {roughness: rndR(), metalness: rndM()},
     1
   );
 
   const material_3 = canvasTextureMaterial(
-    {...maps_3, envMap},
+    {...maps[2], envMap},
     {roughness: rndR(), metalness: rndM()},
     1
   );
