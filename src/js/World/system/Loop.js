@@ -95,7 +95,7 @@ class Loop {
     img.src = imgData;
 
     const link = document.createElement('a');
-    link.download = 'download.png';
+    link.download = 'crash_' + fxhash + '.png';
     link.href = imgData;
     link.click();
     link.delete;
@@ -137,12 +137,23 @@ class Loop {
     if (this.stepCounter === 180) {
       // this.prepareForCapture();
       // this.saveAsPng();
-      fxpreview();
       // location.reload();
+      fxpreview();
       ++ this.stepCounter;
     } else if (this.stepCounter < 180) {
       ++ this.stepCounter;
     }
+
+    // render on first collisions
+    // if (this.stepCounter > 180) {
+    //   ++ this.stepCounter;
+    //   if (this.stepCounter === 800) {
+    //     // this.prepareForCapture();
+    //     // this.saveAsPng();
+    //     // location.reload();
+    //     // fxpreview();
+    //   }
+    // }
   }
 
   tick() {
