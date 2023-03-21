@@ -7,7 +7,12 @@
     <script id="fxhash-snippet">
       //---- do not edit the following code (you can indent as you wish)
       let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
-      var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')   
+      var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+      // var fxhash = "ooRnZhYmEWbUNYwtXVkEFq9jq1r7NVZPSPezEBHQzdLXafbqeBs"
+      // var fxhash = "ooCjYLCHTCe54Sg4ACT8cwhAPhtQMVfm2L3r8g3nuYKjSwYfotL"
+      // var fxhash = "ootU4qdvajDQ2Fo3US46u8LQaiWBk5WmgYrzq6xsYPf1syV3rPK"
+      // var fxhash = "oog57VEtRWXcEEvLAtEy8dWcFKDM1PssTanpuv94jexx755v7a2"
+      // var fxhash = "oo8VUnUCEfUW1xaN4uPUHMdWeMar9eqtgyKJY8EUr4odvFntbJu"
       let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
       let fxhashTrunc = fxhash.slice(2)
       let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')

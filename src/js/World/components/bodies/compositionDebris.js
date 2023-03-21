@@ -25,7 +25,7 @@ export const compositionDebris = (
       heightRange: 0.04, heightMin: 0.02,
       depthRange:  0.04,  depthMin: 0.02,
       velocity,
-      name: ''
+      name: 'debris'
     }
   );
 
@@ -43,7 +43,7 @@ export const compositionDebris = (
       heightRange: 0.1, heightMin: 0.02,
       depthRange:  0.1,  depthMin: 0.02,
       velocity,
-      name: ''
+      name: 'debris'
     }
   );
 
@@ -61,7 +61,7 @@ export const compositionDebris = (
       heightRange: 0.25, heightMin: 0.25,
       depthRange:  0.25,  depthMin: 0.25,
       velocity,
-      name: 'large-bullet'
+      name: 'debris'
     }
   );
 
@@ -79,7 +79,7 @@ export const compositionDebris = (
       heightRange: 0.04, heightMin: 0.02,
       depthRange:  0.04,  depthMin: 0.02,
       velocity,
-      name: ''
+      name: 'debris'
     }
   );
 }

@@ -20,8 +20,9 @@ class Loop {
     this.dt = dt;
     this.accumulator = 0;
     this.stepCounter = 0;
-    this.allBodiesStopped = false;
+    this.allBodiesVisible = false;
     this.collideTimer = 0;
+    this.packed = false;
     document.addEventListener('keypress', this.togglePhysicsEngine);
     document.addEventListener('visibilitychange', e => this.handleVisibilityChange(e));
 
@@ -88,7 +89,7 @@ class Loop {
   }
 
   saveAsPng = () => {
-    console.log('downloading...');
+    console.log('downloading...', this.stepCounter);
 
     const imgData = this.renderer.domElement.toDataURL();
     var img = new Image();
@@ -106,54 +107,69 @@ class Loop {
     // for (const object of this.updatableBodies) {
     //   object.tick(this.dt);
     // }
-    
-    // stop all the bodies and them run tick on them only once
-    // bodies are stopped by setting zero force on all of them until they are placed so they are not overlapping in space
-    // looks like doing this in 6 steps is enough to acchive this result
-    // more than 6 stops might break determinism on Firefox
 
-    if (this.stepCounter < 20) {
+    if (!this.packed && this.stepCounter > 0) {
+      let p_l = true;
       this.bodies.forEach(body => {
+        // console.log(body.mesh.name);
+        if (body.mesh.name !== 'debris') {
+          const c = (
+             body.rigidBody.linvel().x < 0.4
+          && body.rigidBody.linvel().y < 0.4
+          && body.rigidBody.linvel().z < 0.4
+          && body.rigidBody.angvel().x < 0.4
+          && body.rigidBody.angvel().y < 0.4
+          && body.rigidBody.angvel().z < 0.4
+        );
+        if (!c) {
+          p_l = false;
+        }
         body.rigidBody.resetForces(true);  // Reset the forces to zero.
         body.rigidBody.resetTorques(true); // Reset the torques to zero.
         body.rigidBody.setLinvel({x: 0, y: 0, z: 0}, true);
-        body.rigidBody.setAngvel({x: 0, y: 0, z: 0}, true);
-        // console.log('stop body', this.bodies.length);
-      });
-    } else if (!this.allBodiesStopped) {
-      this.bodies.forEach(body => {
-        if (body.rigidBody.tick != undefined) {
-          body.rigidBody.tick();
+        body.rigidBody.setAngvel({x: 0, y: 0, z: 0}, true); 
         }
+      });
+      this.packed = p_l;
+      console.log('stop', this.bodies.length, this.stepCounter, this.packed);
+    } else if (this.packed && !this.allBodiesVisible) {
+      this.bodies.forEach(body => {
         body.mesh.visible = true;
       });
-      this.allBodiesStopped = true;
 
       const preloader = document.getElementById("preloader");
       preloader.style.display = "none";
       preloader?.remove();
-    };
 
-    if (this.stepCounter === 180) {
       // this.prepareForCapture();
       // this.saveAsPng();
       // location.reload();
       fxpreview();
-      ++ this.stepCounter;
-    } else if (this.stepCounter < 180) {
-      ++ this.stepCounter;
+
+      this.allBodiesVisible = true;
+    };
+
+
+    if (this.stepCounter === 20) {
+      // console.log('shoot particles', this.stepCounter);
+      this.bodies.forEach(body => {
+        if (body.rigidBody.tick != undefined) {
+          body.rigidBody.tick();
+        }
+      });
     }
 
-    // render on first collisions
-    // if (this.stepCounter > 180) {
-    //   ++ this.stepCounter;
-    //   if (this.stepCounter === 800) {
-    //     // this.prepareForCapture();
-    //     // this.saveAsPng();
-    //     // location.reload();
-    //     // fxpreview();
-    //   }
+    // if (this.stepCounter === 180) {
+    //   this.prepareForCapture();
+    //   this.saveAsPng();
     // }
+
+    // safe trigger -- if structure is not stopped until frame 220, show it anyway
+    if (this.stepCounter < 220) {
+      ++ this.stepCounter;
+    } else {
+      this.packed = true;
+    }
   }
 
   tick() {
