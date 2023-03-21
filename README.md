@@ -23,6 +23,7 @@ npm run deploy
 - build 
 - add './' in frot of css and js files
 - use only first js file i.e. -> `<script src="./index.js" defer></script>`
+- remember to remove type='module' !!! in front of first script
 - delete second js file...
 - rename files to index.js and index.css
 - copy paste fxhash code from their example page `https://github.com/fxhash/fxhash-simple-boilerplate/blob/master/index.html`

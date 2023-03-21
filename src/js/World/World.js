@@ -62,13 +62,12 @@ class World {
     this.largeObjectsNum = Math.round(6 * $fx.rand()) + 4;
     this.largeObjectsVel = largeObjectsVel($fx.rand());
 
-    $fx.features = {
+    $fx.features({
       'Background Color': this.colorComposition.bg.name,
       'Color Palette': this.colorComposition.name,
       'Large Impact Objects' : this.largeObjectsNum,
       'Impact Velocity' : this.largeObjectsVel.name,
-    };
-    // console.log('$fx.features', $fx.features);
+    });
     
     RAPIER.init().then(() => {
       this.physicsConfig();
