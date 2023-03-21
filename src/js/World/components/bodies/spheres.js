@@ -21,11 +21,11 @@ const spheres = (
   } = props;
 
   const rndR = () => {
-    return fxrand() * 0.85;
+    return $fx.rand() * 0.85;
   }
 
   const rndM = () => {
-    return fxrand() * 0.25;
+    return $fx.rand() * 0.25;
   }
 
   const material_1 = canvasTextureMaterial(
@@ -50,10 +50,10 @@ const spheres = (
 
   for (let i = 0; i < n; i++) {
 
-    const mSeed = fxrand();
+    const mSeed = $fx.rand();
     let materialIndex = 0;
     if (mSeed > colorBalance.cb1) {
-      const miSeed = fxrand();
+      const miSeed = $fx.rand();
       if (miSeed < colorBalance.cb2) {
         materialIndex = 1;
       } else {
@@ -62,24 +62,24 @@ const spheres = (
     }
     const material = materials[materialIndex];
 
-    // const randomSeed = fxrand();
+    // const randomSeed = $fx.rand();
     // const materialIndex = Math.round((materials.length - 1) * randomSeed)
     // const material = materials[materialIndex];
 
     const size = {
-      radius: fxrand() * sizeRange + sizeMin
+      radius: $fx.rand() * sizeRange + sizeMin
     }
 
     const translation = {
-      x: fxrand() * spreadWidth - spreadWidth/2,
-      y: fxrand() * spreadWidth - spreadWidth/2,
-      z: fxrand() * spreadWidth - spreadWidth/2
+      x: $fx.rand() * spreadWidth - spreadWidth/2,
+      y: $fx.rand() * spreadWidth - spreadWidth/2,
+      z: $fx.rand() * spreadWidth - spreadWidth/2
     }
 
     const rotation = {
-      x: MathUtils.degToRad(fxrand() * 360),
-      y: MathUtils.degToRad(fxrand() * 360),
-      z: MathUtils.degToRad(fxrand() * 360),
+      x: MathUtils.degToRad($fx.rand() * 360),
+      y: MathUtils.degToRad($fx.rand() * 360),
+      z: MathUtils.degToRad($fx.rand() * 360),
     }
     
     const sphereItem = sphere(material, size, translation, rotation, physicsWorld);

@@ -63,14 +63,14 @@ const plane = (
   //   const ir = 0.8;
   //   const tir = 0.6;
   //   rigidBody.applyImpulse({
-  //     x: fxrand() * ir - ir/2,
-  //     y: fxrand() * ir - ir/2,
-  //     z: fxrand() * ir - ir/2
+  //     x: $fx.rand() * ir - ir/2,
+  //     y: $fx.rand() * ir - ir/2,
+  //     z: $fx.rand() * ir - ir/2
   //   }, true);
   //   rigidBody.applyTorqueImpulse({
-  //     x: fxrand() * tir - tir/2,
-  //     y: fxrand() * tir - tir/2,
-  //     z: fxrand() * tir - tir/2
+  //     x: $fx.rand() * tir - tir/2,
+  //     y: $fx.rand() * tir - tir/2,
+  //     z: $fx.rand() * tir - tir/2
   //   }, true);
   // };
 

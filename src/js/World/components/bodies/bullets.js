@@ -22,17 +22,17 @@ export const bullets = (
     name
   } = props;
 
-  const bulletNum = Math.round(nRange * fxrand()) + nMin;
+  const bulletNum = Math.round(nRange * $fx.rand()) + nMin;
   // if (name === 'large-bullet') {
   //   console.log('bulletNum:', bulletNum); 
   // }
 
   const rndR = () => {
-    return fxrand() * 0.85;
+    return $fx.rand() * 0.85;
   }
 
   const rndM = () => {
-    return fxrand() * 0.25;
+    return $fx.rand() * 0.25;
   }
 
   const material_1 = canvasTextureMaterial(
@@ -56,26 +56,26 @@ export const bullets = (
   const materials = [material_1, material_2, material_3];
 
   for (let i = 0; i < bulletNum; i++) {
-    const randomSeed = fxrand();
+    const randomSeed = $fx.rand();
     const materialIndex = Math.round((materials.length - 1) * randomSeed)
     const material = materials[materialIndex];
 
     const size = {
-      width:  fxrand() *  widthRange  + widthMin,
-      height: fxrand() * heightRange + heightMin,
-      depth:  fxrand() *  depthRange  + depthMin
+      width:  $fx.rand() *  widthRange  + widthMin,
+      height: $fx.rand() * heightRange + heightMin,
+      depth:  $fx.rand() *  depthRange  + depthMin
     }
 
     const translation = {
-      x: fxrand() * xRange + xMin,
-      y: fxrand() * spreadWidth - spreadWidth/2,
-      z: fxrand() * spreadWidth - spreadWidth/2
+      x: $fx.rand() * xRange + xMin,
+      y: $fx.rand() * spreadWidth - spreadWidth/2,
+      z: $fx.rand() * spreadWidth - spreadWidth/2
     }
 
     const rotation = {
-      x: MathUtils.degToRad(fxrand() * 360),
-      y: MathUtils.degToRad(fxrand() * 360),
-      z: MathUtils.degToRad(fxrand() * 360),
+      x: MathUtils.degToRad($fx.rand() * 360),
+      y: MathUtils.degToRad($fx.rand() * 360),
+      z: MathUtils.degToRad($fx.rand() * 360),
     }
     const cubeItem = bullet(material, size, translation, rotation, name, physicsWorld);
 

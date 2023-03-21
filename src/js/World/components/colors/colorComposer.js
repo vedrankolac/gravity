@@ -3,7 +3,7 @@ import { shuffle } from "../../utils/arrayFxRnd"
 import { Color } from "three";
 
 const colorComposer = () => {
-  const colorCompositionID = fxrand();
+  const colorCompositionID = $fx.rand();
   const envMapIntensity = 1;
 
   // primitives
@@ -23,13 +23,13 @@ const colorComposer = () => {
 
   // palette tools
 
-  const brightSaturation = () => fxrand() * 0.1 + 0.9;
-  const strongSaturation = () => fxrand() * 0.2 + 0.8;
-  const darkSaturation   = () => fxrand() * 0.4 + 0.2;
+  const brightSaturation = () => $fx.rand() * 0.1 + 0.9;
+  const strongSaturation = () => $fx.rand() * 0.2 + 0.8;
+  const darkSaturation   = () => $fx.rand() * 0.4 + 0.2;
 
-  const brightLightness = () => fxrand() * 0.35 + 0.5;
-  const strongLightness = () => fxrand() * 0.3  + 0.2;
-  const darkLightness   = () => fxrand() * 0.2  + 0.04;
+  const brightLightness = () => $fx.rand() * 0.35 + 0.5;
+  const strongLightness = () => $fx.rand() * 0.3  + 0.2;
+  const darkLightness   = () => $fx.rand() * 0.2  + 0.04;
 
   const brightTheme = [brightSaturation(), brightLightness()];
   const strongTheme = [strongSaturation(), strongLightness()];
@@ -43,14 +43,14 @@ const colorComposer = () => {
 
   const getHueVariants = hue => {
     return [
-      hue + fxrand() * 0.2 + 0.5,
-      hue + fxrand() * 0.2 + 0.5,
+      hue + $fx.rand() * 0.2 + 0.5,
+      hue + $fx.rand() * 0.2 + 0.5,
     ]
   }
 
-  const grayscaleBright = () => fxrand() * 0.35 + 0.5;
-  const grayscaleStrong = () => fxrand() * 0.3  + 0.2;
-  const grayscaleDark   = () => fxrand() * 0.2  + 0.0;
+  const grayscaleBright = () => $fx.rand() * 0.35 + 0.5;
+  const grayscaleStrong = () => $fx.rand() * 0.3  + 0.2;
+  const grayscaleDark   = () => $fx.rand() * 0.2  + 0.0;
 
   const grayscaleThemes = [
     grayscaleBright(),
@@ -61,19 +61,19 @@ const colorComposer = () => {
   // palettes
 
   const whiteBlackColor = () => {
-    const themeSeed = fxrand();
+    const themeSeed = $fx.rand();
     const themeIndex = Math.round((themes.length - 1) * themeSeed);
     const theme = themes[themeIndex];
 
     const a = black;
     const b = white;
     const c = {
-      color: hslToHex(fxrand(), ...theme),
+      color: hslToHex($fx.rand(), ...theme),
       envMapIntensity,
       name: 'Color'
     };
 
-    const bgSeed = fxrand();
+    const bgSeed = $fx.rand();
     let bg;
 
     if (bgSeed < 0.6) {
@@ -92,8 +92,8 @@ const colorComposer = () => {
       c: randomized[2],
       bg,
       colorBalance: {
-        cb1: fxrand() * 0.3 + 0.3,
-        cb2: fxrand() * 0.3 + 0.3,
+        cb1: $fx.rand() * 0.3 + 0.3,
+        cb2: $fx.rand() * 0.3 + 0.3,
       },
       name: 'Color, Black & White'
     }
@@ -101,25 +101,25 @@ const colorComposer = () => {
   paleteGenerators.push(whiteBlackColor);
 
   const duoAndLightness = () => {
-    const themeSeed = fxrand();
+    const themeSeed = $fx.rand();
     const themeIndex = Math.round((themes.length - 1) * themeSeed);
     const theme = themes[0];
 
-    const themeASeed = fxrand();
+    const themeASeed = $fx.rand();
     const themeAIndex = Math.round((themes.length - 1) * themeASeed);
     const themeA = themes[themeAIndex];
 
-    const themeBSeed = fxrand();
+    const themeBSeed = $fx.rand();
     const themeBIndex = Math.round((themes.length - 1) * themeBSeed);
     const themeB = themes[2];
 
-    const initHue = fxrand() * 0.14;
+    const initHue = $fx.rand() * 0.14;
     const secondHueVariants = getHueVariants(initHue);
-    const secondHueSeed = fxrand();
+    const secondHueSeed = $fx.rand();
     const secondHueIndex = Math.round((secondHueVariants.length - 1) * secondHueSeed);
     const secondHue = secondHueVariants[secondHueIndex];
 
-    const a = Math.round(fxrand()) ? white : black;
+    const a = Math.round($fx.rand()) ? white : black;
     const b = {
       color: hslToHex(initHue, ...themeA),
       envMapIntensity,
@@ -131,7 +131,7 @@ const colorComposer = () => {
       name: 'Color'
     };
 
-    const bgSeed = fxrand();
+    const bgSeed = $fx.rand();
     let bg;
 
     if (bgSeed < 0.5) {
@@ -157,8 +157,8 @@ const colorComposer = () => {
       c: randomized[2],
       bg: randomized[0],
       colorBalance: {
-        cb1: fxrand() * 0.2 + 0.66,
-        cb2: fxrand() * 0.2 + 0.6,
+        cb1: $fx.rand() * 0.2 + 0.66,
+        cb2: $fx.rand() * 0.2 + 0.6,
       },
       name: ccName
     }
@@ -166,27 +166,27 @@ const colorComposer = () => {
   paleteGenerators.push(duoAndLightness);
 
   const tripple = () => {
-    const themeASeed = fxrand();
+    const themeASeed = $fx.rand();
     const themeAIndex = Math.round((themes.length - 1) * themeASeed);
     const themeA = themes[0];
 
-    const themeBSeed = fxrand();
+    const themeBSeed = $fx.rand();
     const themeBIndex = Math.round((themes.length - 1) * themeBSeed);
     const themeB = themes[themeBIndex];
 
-    const themeCSeed = fxrand();
+    const themeCSeed = $fx.rand();
     const themeCIndex = Math.round((themes.length - 2) * themeCSeed);
     const themeC = themes[2];
 
-    const initHue = fxrand() * 0.14;
+    const initHue = $fx.rand() * 0.14;
 
     const secondHueVariants = getHueVariants(initHue);
-    const secondHueSeed = fxrand();
+    const secondHueSeed = $fx.rand();
     const secondHueIndex = Math.round((secondHueVariants.length - 1) * secondHueSeed);
     const secondHue = secondHueVariants[secondHueIndex];
 
     const thirdHueVariants = getHueVariants(secondHue);
-    const thirdHueSeed = fxrand();
+    const thirdHueSeed = $fx.rand();
     const thirdHueIndex = Math.round((thirdHueVariants.length - 1) * thirdHueSeed);
     const thirdHue = thirdHueVariants[thirdHueIndex];
 
@@ -215,23 +215,23 @@ const colorComposer = () => {
       c: randomized[2],
       bg: randomizedBg[0],
       colorBalance: {
-        cb1: fxrand() * 0.2 + 0.66,
-        cb2: fxrand() * 0.2 + 0.6,
+        cb1: $fx.rand() * 0.2 + 0.66,
+        cb2: $fx.rand() * 0.2 + 0.6,
       }
     };
   }
   paleteGenerators.push(tripple);
 
   const grayscale = () => {
-    const themeASeed = fxrand();
+    const themeASeed = $fx.rand();
     const themeAIndex = Math.round((grayscaleThemes.length - 1) * themeASeed);
     const themeA = grayscaleThemes[0];
 
-    const themeBSeed = fxrand();
+    const themeBSeed = $fx.rand();
     const themeBIndex = Math.round((grayscaleThemes.length - 1) * themeBSeed);
     const themeB = grayscaleThemes[themeBIndex];
 
-    const themeCSeed = fxrand();
+    const themeCSeed = $fx.rand();
     const themeCIndex = Math.round((grayscaleThemes.length - 1) * themeCSeed);
     const themeC = grayscaleThemes[2];
 
@@ -263,8 +263,8 @@ const colorComposer = () => {
       c: randomized[2],
       bg: randomizedBg[0],
       colorBalance: {
-        cb1: fxrand() * 0.6 + 0.3,
-        cb2: fxrand() * 0.6 + 0.3,
+        cb1: $fx.rand() * 0.6 + 0.3,
+        cb2: $fx.rand() * 0.6 + 0.3,
       },
       name: 'Grayscale'
     }

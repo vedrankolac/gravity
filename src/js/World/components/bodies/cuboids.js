@@ -21,11 +21,11 @@ const cuboids = (
   } = props;
 
   const rndR = () => {
-    return fxrand() * 0.95;
+    return $fx.rand() * 0.95;
   }
 
   const rndM = () => {
-    return fxrand() * 0.55;
+    return $fx.rand() * 0.55;
   }
 
   const material_1 = canvasTextureMaterial(
@@ -50,10 +50,10 @@ const cuboids = (
 
   for (let i = 0; i < n; i++) {
 
-    const mSeed = fxrand();
+    const mSeed = $fx.rand();
     let materialIndex = 0;
     if (mSeed > colorBalance.cb1) {
-      const miSeed = fxrand();
+      const miSeed = $fx.rand();
       if (miSeed < colorBalance.cb2) {
         materialIndex = 1;
       } else {
@@ -62,19 +62,19 @@ const cuboids = (
     }
     const material = materials[materialIndex];
 
-    // const randomSeed = fxrand();
+    // const randomSeed = $fx.rand();
     // const materialIndex = Math.round((materials.length - 1) * randomSeed)
     // const material = materials[materialIndex];
 
     const size = {
-      width:  fxrand() *  widthRange  + widthMin,
-      height: fxrand() * heightRange + heightMin,
-      depth:  fxrand() *  depthRange  + depthMin
+      width:  $fx.rand() *  widthRange  + widthMin,
+      height: $fx.rand() * heightRange + heightMin,
+      depth:  $fx.rand() *  depthRange  + depthMin
     }
 
-    const r = fxrand() * distanceMin + fxrand() * distanceRange;
-    const p = MathUtils.degToRad(fxrand() * 360);
-    const g = MathUtils.degToRad(fxrand() * 360);
+    const r = $fx.rand() * distanceMin + $fx.rand() * distanceRange;
+    const p = MathUtils.degToRad($fx.rand() * 360);
+    const g = MathUtils.degToRad($fx.rand() * 360);
 
     const translation = {
       x: r * Math.sin(p) * Math.cos(g),
@@ -83,9 +83,9 @@ const cuboids = (
     }
 
     const rotation = {
-      x: MathUtils.degToRad(fxrand() * 360),
-      y: MathUtils.degToRad(fxrand() * 360),
-      z: MathUtils.degToRad(fxrand() * 360),
+      x: MathUtils.degToRad($fx.rand() * 360),
+      y: MathUtils.degToRad($fx.rand() * 360),
+      z: MathUtils.degToRad($fx.rand() * 360),
     }
     
     const cubeItem = cube(material, size, translation, rotation, physicsWorld);

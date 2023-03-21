@@ -14,9 +14,9 @@ export const compositionMain = (
 
   const colorBalance = colorComposition.colorBalance;
 
-  const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, fxrand()*0.25, fxrand()*0.55);
-  const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, fxrand()*0.25, fxrand()*0.55);
-  const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, fxrand()*0.25, fxrand()*0.55);
+  const maps_1 = new RndNoiseTresholdNormal(colorComposition.a.color, $fx.rand()*0.25, $fx.rand()*0.55);
+  const maps_2 = new RndNoiseTresholdNormal(colorComposition.b.color, $fx.rand()*0.25, $fx.rand()*0.55);
+  const maps_3 = new RndNoiseTresholdNormal(colorComposition.c.color, $fx.rand()*0.25, $fx.rand()*0.55);
   const maps = [maps_1, maps_2, maps_3];
 
   const spheresMid = spheres(

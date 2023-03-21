@@ -19,11 +19,11 @@ const planes = (
   } = props;
 
   const rndR = () => {
-    return fxrand() * 0.85;
+    return $fx.rand() * 0.85;
   }
 
   const rndM = () => {
-    return fxrand() * 0.75;
+    return $fx.rand() * 0.75;
   }
 
   const material_1 = canvasTextureMaterial(
@@ -47,10 +47,10 @@ const planes = (
   const materials = [material_1, material_2, material_3];
 
   for (let i = 0; i < n; i++) {
-    const mSeed = fxrand();
+    const mSeed = $fx.rand();
     let materialIndex = 0;
     if (mSeed > colorBalance.cb1) {
-      const miSeed = fxrand();
+      const miSeed = $fx.rand();
       if (miSeed < colorBalance.cb2) {
         materialIndex = 1;
       } else {
@@ -59,24 +59,24 @@ const planes = (
     }
     const material = materials[materialIndex];
 
-    // const randomSeed = fxrand();
+    // const randomSeed = $fx.rand();
     // const materialIndex = Math.round((materials.length - 1) * randomSeed)
     // const material = materials[materialIndex];
 
     const size = {
-      width:  fxrand() * widthRange  +  widthMin,
-      height: fxrand() * heightRange + heightMin,
+      width:  $fx.rand() * widthRange  +  widthMin,
+      height: $fx.rand() * heightRange + heightMin,
       depth:  0.02
     }
     const translation = {
-      x: fxrand() * spreadWidth - spreadWidth/2,
-      y: fxrand() * spreadWidth - spreadWidth/2,
-      z: fxrand() * spreadWidth - spreadWidth/2
+      x: $fx.rand() * spreadWidth - spreadWidth/2,
+      y: $fx.rand() * spreadWidth - spreadWidth/2,
+      z: $fx.rand() * spreadWidth - spreadWidth/2
     }
     const rotation = {
-      x: MathUtils.degToRad(fxrand() * 360),
-      y: MathUtils.degToRad(fxrand() * 360),
-      z: MathUtils.degToRad(fxrand() * 360),
+      x: MathUtils.degToRad($fx.rand() * 360),
+      y: MathUtils.degToRad($fx.rand() * 360),
+      z: MathUtils.degToRad($fx.rand() * 360),
     }
     const planeItem = plane(material, size, translation, rotation, physicsWorld);
     scene.add(planeItem.mesh);

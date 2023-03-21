@@ -133,7 +133,7 @@ class Loop {
         }
       });
       this.packed = p_l;
-      console.log('stop', this.bodies.length, this.stepCounter, this.packed);
+      // console.log('stop', this.bodies.length, this.stepCounter, this.packed);
     } else if (this.packed && !this.allBodiesVisible) {
       this.bodies.forEach(body => {
         body.mesh.visible = true;
@@ -146,7 +146,7 @@ class Loop {
       // this.prepareForCapture();
       // this.saveAsPng();
       // location.reload();
-      fxpreview();
+      $fx.preview();
 
       this.allBodiesVisible = true;
     };

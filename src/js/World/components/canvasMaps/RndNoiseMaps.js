@@ -38,24 +38,24 @@ class RndNoiseTresholdNormal {
       const n = ccPixels.length;
       let i = 0;
 
-      const darkSpotTreshold           = fxrand() * 0.04;
-      const brightSpotTreshold         = fxrand() * 0.002;
+      const darkSpotTreshold           = $fx.rand() * 0.04;
+      const brightSpotTreshold         = $fx.rand() * 0.002;
 
       while (i < n) {
         let iN = i;
 
         // add background noise
-        const rnd = fxrand()
+        const rnd = $fx.rand()
         let noiseLevel  = 1 - (rnd * colorNoiselevel);
         let nNoiseLevel = 1 - (rnd * normalNoiselevel);
 
         // dark px
-        let td = fxrand();
-        const blackORGrayscale = Math.round(fxrand());
+        let td = $fx.rand();
+        const blackORGrayscale = Math.round($fx.rand());
         if (td < darkSpotTreshold) {
-          // noiseLevel = blackORGrayscale ? fxrand() * 1 : 0;
-          noiseLevel = fxrand() * 1;
-          nNoiseLevel = 1 - fxrand() * 0.45;
+          // noiseLevel = blackORGrayscale ? $fx.rand() * 1 : 0;
+          noiseLevel = $fx.rand() * 1;
+          nNoiseLevel = 1 - $fx.rand() * 0.45;
         }
 
         let r = color.r * noiseLevel;
@@ -63,11 +63,11 @@ class RndNoiseTresholdNormal {
         let b = color.b * noiseLevel;
 
         // bright px
-        const tb = fxrand();
-        const whiteORGrayscale = Math.round(fxrand());
+        const tb = $fx.rand();
+        const whiteORGrayscale = Math.round($fx.rand());
         if (tb < brightSpotTreshold) {
-          // noiseLevel = whiteORGrayscale ? fxrand() * 0.75 : 0.9;
-          noiseLevel = fxrand() * 1;
+          // noiseLevel = whiteORGrayscale ? $fx.rand() * 0.75 : 0.9;
+          noiseLevel = $fx.rand() * 1;
           r = mapNumber(noiseLevel, 0, 1, color.r, 1);
           g = mapNumber(noiseLevel, 0, 1, color.g, 1);
           b = mapNumber(noiseLevel, 0, 1, color.b, 1);
