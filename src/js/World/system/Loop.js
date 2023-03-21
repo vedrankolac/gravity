@@ -59,9 +59,11 @@ class Loop {
       if (this.runPhysics === true) {
         this.clock.stop();
         this.runPhysics = false;
+        this.orbitControls.autoRotate = false;
       } else {
         this.clock.start();
         this.runPhysics = true;
+        this.orbitControls.autoRotate = true;
       }
     }
   }
