@@ -11,4 +11,7 @@ export const variations = [
   'oohi3JjYW5roMN3Ut8hGdixFvsjbS84NedDAsRoMq4nURnHf8nN',
   'ooyXHntvdDV4b2p6EkChibHbieVa3zEhUvy1RZ9ZaX68xwj6PLb',
   'oonW2crtg5chKzwXLQH9Sgh1Dj4peqW1yiu8T5GqwgFzs8aB9ks',
+  'ooBC1kKmEFDQcVZwdURN9356sNebNjX6s2MbQBYgpxFaKvQTsED',
+  'ooDysox1i5V447Wt7LCr7A91axCgih3yTz76Hqu8txavnLUqYmf',
+  'oovLA6vbJ9ahPKRbcUzMSXrA6Eh67dyTNxEr9xq8Yc8h6kfQyFG',
 ];

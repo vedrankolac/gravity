@@ -33,5 +33,5 @@ export const setPrintTools = (renderer, composer, postprocessingEnabled, scene, 
   }
 
   // let nIntervId = setInterval(saveAsPngAndRefresh, 20000);
-  document.addEventListener('keypress', saveOnPKeyPress);
+  // document.addEventListener('keypress', saveOnPKeyPress);
 }
