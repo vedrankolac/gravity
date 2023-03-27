@@ -5,17 +5,15 @@ const createCamera = () => {
   const camera = new PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.1, 400 );
 
   // center distance
-  const radius  = $fx.rand() * 6 + 20;
-  // const radius  = 20;
+  const radius  = $fx.rand() * 40 + 20;
 
   // up - down
   const polar   = MathUtils.degToRad($fx.rand() * 20 + 70);
 
   // left - right
-  const angle = MathUtils.degToRad($fx.rand() * 30 + 70);
+  const angle = MathUtils.degToRad($fx.rand() * 180);
   const side = $fx.rand();
   const equator = (side > 0.5) ? angle : angle * -1;
-  // const equator = MathUtils.degToRad(0);
 
   const cameraVector = new Vector3();
   cameraVector.setFromSphericalCoords(radius, polar, equator);

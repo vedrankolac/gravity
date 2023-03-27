@@ -11,12 +11,23 @@ export const compositionDebris = (
 ) => {
   const velocity = largeObjectsVel.value;
 
+  const c = [
+    colorComposition.a.color,
+    colorComposition.b.color,
+    colorComposition.c.color,
+  ];
+  let ci = 0;
+
+  while (c[ci] === colorComposition.bg.color) {
+    ci++;
+  }
+
   const debrisSmallBegin = bullets(
     scene,
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
+    c[ci],
     {
       spreadWidth: 12,
       nRange: 40, nMin: 320,
@@ -34,7 +45,7 @@ export const compositionDebris = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
+    c[ci],
     {
       spreadWidth: 12,
       nRange: 20, nMin: 80,
@@ -52,7 +63,7 @@ export const compositionDebris = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
+    c[ci],
     {
       spreadWidth: 9,
       nRange: 0, nMin: largeObjectsNum,
@@ -70,7 +81,7 @@ export const compositionDebris = (
     loop,
     physicsWorld,
     envMap,
-    colorComposition,
+    c[ci],
     {
       spreadWidth: 12,
       nRange: 20, nMin: 120,

@@ -7,7 +7,7 @@ export const bullets = (
   loop,
   physicsWorld,
   envMap,
-  colorComposition,
+  color,
   props
 ) => {
 
@@ -37,19 +37,19 @@ export const bullets = (
 
   const material_1 = canvasTextureMaterial(
     {envMap},
-    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    {roughness: rndR(), metalness: rndM(), color: color},
     1
   );
 
   const material_2 = canvasTextureMaterial(
     {envMap},
-    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    {roughness: rndR(), metalness: rndM(), color: color},
     1
   );
 
   const material_3 = canvasTextureMaterial(
     {envMap},
-    {roughness: rndR(), metalness: rndM(), color: colorComposition.b.color},
+    {roughness: rndR(), metalness: rndM(), color: color},
     1
   );
 
