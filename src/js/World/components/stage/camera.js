@@ -5,33 +5,22 @@ const createCamera = () => {
   const camera = new PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.1, 400 );
 
   // center distance
-  // const radius  = $fx.rand() * 40 + 20;
-  const radiusRange = $fx.rand();
-  let radius = 20;
+  const radius  = $fx.rand() * 26 + 28;
+  // const radiusRange = $fx.rand();
+  // const inRange = $fx.rand();
+  // let radius = 54;
 
-  // if (radiusRange < 0.25) {
-  //   radius = 20;
-  // } else if (radiusRange >= 0.25 && radiusRange < 0.5) {
-  //   radius = 30;
-  // } else if (radiusRange >= 0.5 && radiusRange < 0.75) {
-  //   radius = 40;
-  // } else if (radiusRange >= 0.75 && radiusRange < 0.9) {
-  //   radius = 50;
+  // if (radiusRange < 0.2) {
+  //   radius = inRange * 10 + 20;
+  // } else if (radiusRange >= 0.2 && radiusRange < 0.6) {
+  //   radius = inRange * 10 + 30;
+  // } else if (radiusRange >= 0.6 && radiusRange < 0.8) {
+  //   radius = inRange * 10 + 40;
+  // } else if (radiusRange >= 0.8 && radiusRange < 0.9) {
+  //   radius = inRange * 10 + 50;
   // } else if (radiusRange >= 0.9 && radiusRange <= 1) {
-  //   radius = 60;
+  //   radius = inRange * 10 + 60;
   // }
-
-  if (radiusRange < 0.2) {
-    radius = 20;
-  } else if (radiusRange >= 0.2 && radiusRange < 0.6) {
-    radius = 30;
-  } else if (radiusRange >= 0.6 && radiusRange < 0.8) {
-    radius = 40;
-  } else if (radiusRange >= 0.8 && radiusRange < 0.9) {
-    radius = 50;
-  } else if (radiusRange >= 0.9 && radiusRange <= 1) {
-    radius = 60;
-  }
 
   // up - down
   const polar   = MathUtils.degToRad($fx.rand() * 20 + 70);
