@@ -1,4 +1,14 @@
 ## gravity
+
+Published as "The Crash". Exploration of high-velocity collisions in zero gravity.
+
+It’s made with three.js and Rapier — a fast game/physics engine made with Rust programming language. All textures, normal and light maps are created dynamically using Canvas. This work is best viewed at 4k and 120Hz or better display.
+
+Published as NFT series on [fxhash](https://www.fxhash.xyz/generative/slug/crash)
+
+Fullscreen version [here](https://vedrankolac.github.io/gravity/)
+
+### Boilerplate
 Boilerplate for a fast start with three.js materials in rapier physics engine on Oculus Quest 2 VR headset.
 - only tested on Oculus Quest 2
 - movement is controlled with joystick
